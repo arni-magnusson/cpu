@@ -6,6 +6,7 @@
 #         improve_intel_low.png, improve_intel_medium.png (report)
 
 library(TAF)
+source("utilities.R")  # implot
 
 mkdir("report")
 
@@ -15,15 +16,6 @@ i7_medium <- read.taf("output/i7_medium.csv", colClasses=c(Date="Date"))
 i7_low <- read.taf("output/i7_low.csv", colClasses=c(Date="Date"))
 r7_high <- read.taf("output/r7_high.csv", colClasses=c(Date="Date"))
 r7_low <- read.taf("output/r7_low.csv", colClasses=c(Date="Date"))
-
-# Plot function
-implot <- function(x)
-{
-  par(plt=c(0.2, 0.9, 0.2, 0.9))
-  labels <- paste0(x$Model[-1], " (", format(x$Date[-1], "%Y"), ")")
-  barplot(100*x$Improve[-1], names=labels, horiz=TRUE, las=1,
-          xlim=c(0,52), xlab="Relative speed improvement (%)")
-}
 
 # Plot improvement
 taf.png("improve_amd_high")
