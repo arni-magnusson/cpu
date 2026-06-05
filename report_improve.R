@@ -27,11 +27,11 @@ implot(r7_low)
 dev.off()
 
 taf.png("improve_intel_high")
-implot(i7_high)
+implot(i7_high[-1,])
 dev.off()
 
 taf.png("improve_intel_low")
-implot(i7_low)
+implot(i7_low[-1,])
 dev.off()
 
 taf.png("improve_intel_medium")
