@@ -8,7 +8,7 @@ source("utilities.R")
 
 mkdir("data")
 
-# Read measurements
+# Read data
 p1gen8 <- list()
 p1gen8$idle <- read_turbostat("boot/data/lenovo_p1_gen_8/turbo_0.dat")
 p1gen8$single <- read_turbostat("boot/data/lenovo_p1_gen_8/turbo_1.dat")

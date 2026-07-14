@@ -1,3 +1,20 @@
+plot_machine <- function(machine, name, main=name, xlab="Iteration", ylab="",
+                         pch=1, lwd=1.5, col=c(8,1,4,5), type="p", ...)
+{
+  # Prepare plot elements
+  k <- length(machine)
+  col <- rep(col, length=k)
+  xlim <- c(0, max(sapply(p1gen8, nrow)))
+  ylim <- lim(unlist(lapply(machine, `[[`, name)))
+
+  # Plot
+  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
+  for(i in 1:k)
+    points(machine[[i]][[name]], pch=pch, lwd=lwd, col=col[i], type=type)
+  legend("topright", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
+         bty="n", inset=0.02, y.intersp=1.25)
+}
+
 read_turbostat <- function(file, n=300, burn=0)
 {
   # Parse args
