@@ -57,7 +57,7 @@ read_turbostat <- function(file, n=300, burn=0)
   out <- read.table(text=txt, header=TRUE, skip=beg-1)
 
   # Subset cols
-  out <- out[c("PkgTmp", "PkgWatt", "CorWatt", "SysWatt")]
+  out <- out[c("PkgTmp", "PkgWatt", "CorWatt")]
 
   # Subset rows
   if(burn[1] > 0)
