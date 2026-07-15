@@ -1,18 +1,23 @@
 # Extract results of interest, write CSV output tables
 
-# Before: p1gen8.rds, p15gen1.rds, p3560.rds (model)
-# After:  p1gen8_*.csv, p15gen1_*.csv, p3560_*.csv (output)
+# Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
+# After:  m4700_*.csv, p1gen8_*.csv, p15gen1_*.csv, p3560_*.csv (output)
 
 library(TAF)
 
 mkdir("output")
 
 # Read data
+m4700 <- readRDS("model/m4700.rds")
 p1gen8 <- readRDS("model/p1gen8.rds")
 p15gen1 <- readRDS("model/p15gen1.rds")
 p3560 <- readRDS("model/p3560.rds")
 
 # Write tables
+write.taf(m4700$idle, "output/m4700_idle.csv")
+write.taf(m4700$single, "output/m4700_single.csv")
+write.taf(m4700$main, "output/m4700_main.csv")
+write.taf(m4700$full, "output/m4700_full.csv")
 write.taf(p1gen8$idle, "output/p1gen8_idle.csv")
 write.taf(p1gen8$single, "output/p1gen8_single.csv")
 write.taf(p1gen8$main, "output/p1gen8_main.csv")

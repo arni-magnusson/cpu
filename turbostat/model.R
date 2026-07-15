@@ -1,7 +1,8 @@
 # Run analysis, write model results
 
-# Before: p1gen8.rds, p15gen1.rds, p3560.rds (data)
-# After:  p1gen8_Repairs.png, p1gen8.rds,
+# Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (data)
+# After:  m4700_Repairs.png, m4700.rds,
+#         p1gen8_Repairs.png, p1gen8.rds,
 #         p15gen1_Repairs.png, p15gen1.rds,
 #         p3560_Repairs.png, p3560.rds (model)
 
@@ -11,9 +12,32 @@ source("utilities.R")
 mkdir("model")
 
 # Read data
+m4700 <- readRDS("data/m4700.rds")
 p1gen8 <- readRDS("data/p1gen8.rds")
 p15gen1 <- readRDS("data/p15gen1.rds")
 p3560 <- readRDS("data/p3560.rds")
+
+taf.png("model/m4700_Repairs")
+par(mfrow=c(2, 4))
+# Repair m4700 (CorWatt)
+x <- m4700$full$CorWatt
+m4700$full$CorWatt <- outliers(x, level=0.4, span=10, plot=TRUE)$repaired
+x <- m4700$main$CorWatt
+m4700$main$CorWatt <- outliers(x, level=0.3, span=10, plot=TRUE)$repaired
+x <- m4700$single$CorWatt
+m4700$single$CorWatt <- outliers(x, span=10, plot=TRUE)$repaired
+x <- m4700$idle$CorWatt
+m4700$idle$CorWatt <- outliers(x, plot=TRUE)$repaired
+# Repair m4700 (PkgWatt)
+x <- m4700$full$PkgWatt
+m4700$full$PkgWatt <- outliers(x, level=0.4, span=10, plot=TRUE)$repaired
+x <- m4700$main$PkgWatt
+m4700$main$PkgWatt <- outliers(x, level=0.3, span=10, plot=TRUE)$repaired
+x <- m4700$single$PkgWatt
+m4700$single$PkgWatt <- outliers(x, span=10, plot=TRUE)$repaired
+x <- m4700$idle$PkgWatt
+m4700$idle$PkgWatt <- outliers(x, level=0.07, plot=TRUE)$repaired
+dev.off()
 
 taf.png("model/p1gen8_Repairs")
 par(mfrow=c(2, 3))
@@ -56,7 +80,7 @@ p15gen1$idle$PkgWatt <- outliers(x, level=0.1, span=0.8, plot=TRUE)$repaired
 dev.off()
 
 taf.png("model/p3560_Repairs")
-par(mfrow=c(2, 3))
+par(mfrow=c(2, 4))
 # Repair p3560 (CorWatt)
 x <- p3560$full$CorWatt
 p3560$full$CorWatt <- outliers(x, span=0.3, plot=TRUE)$repaired
@@ -76,6 +100,7 @@ p3560$idle$PkgWatt <- outliers(x, level=0.7, span=0.65, plot=TRUE)$repaired
 dev.off()
 
 # Save RDS objects
+saveRDS(m4700, "model/m4700.rds")
 saveRDS(p1gen8, "model/p1gen8.rds")
 saveRDS(p15gen1, "model/p15gen1.rds")
 saveRDS(p3560, "model/p3560.rds")
