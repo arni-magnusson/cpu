@@ -1,3 +1,34 @@
+outliers <- function(x, level=0.5, plot=FALSE, ...)
+{
+  # Fit loess model
+  iter <- 1:length(x)
+  trend <- loess(x~iter, ...)$fitted
+
+  # Calculate distance
+  dist <- abs(log(x) - log(trend))
+
+  # Identify outliers
+  index <- which(dist > level)
+  values <- x[index]
+  expected <- trend[index]
+
+  # Repair outliers
+  repaired <- replace(x, index, expected)
+
+  # Plot
+  if(plot)
+  {
+    plot(x, ylim=lim(x))
+    lines(trend, lwd=2)
+    points(index, values, pch=4, cex=1.5, lwd=3, col=2)
+    points(index, expected, pch=16, cex=1.5, col=3)
+  }
+
+  out <- list(trend=trend, repaired=repaired, index=index, values=values,
+              expected=expected)
+  out
+}
+
 plot_machine <- function(machine, name, main=name, xlab="Iteration", ylab="",
                          pch=1, lwd=1.5, col=c(8,1,4,5), type="p", ...)
 {
