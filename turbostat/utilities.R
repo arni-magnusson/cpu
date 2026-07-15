@@ -29,8 +29,10 @@ outliers <- function(x, level=0.5, plot=FALSE, ...)
   out
 }
 
-plot_machine <- function(machine, name, main=name, xlab="Iteration", ylab="",
-                         pch=1, lwd=1.5, col=c(8,1,4,5), type="p", ...)
+plot_machine <- function(machine, name,
+                         main=paste(deparse(substitute(machine)), name),
+                         xlab="Iteration", ylab="", pch=1, lwd=1.5,
+                         col=c(8,1,4,5), type="p", ...)
 {
   # Prepare plot elements
   k <- length(machine)

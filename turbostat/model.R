@@ -32,14 +32,16 @@ p1gen8$single$PkgWatt <- outliers(x, span=0.85, plot=TRUE)$repaired
 dev.off()
 
 taf.png("model/p15gen1_Repairs")
-par(mfrow=c(2, 3))
+par(mfrow=c(2, 4))
 # Repair p15gen1 (CorWatt)
 x <- p15gen1$full$CorWatt
 p15gen1$full$CorWatt <- outliers(x, level=0.3, span=0.5, plot=TRUE)$repaired
 x <- p15gen1$main$CorWatt
-p15gen1$full$CorWatt <- outliers(x, span=0.5, plot=TRUE)$repaired
+p15gen1$main$CorWatt <- outliers(x, span=0.5, plot=TRUE)$repaired
 x <- p15gen1$single$CorWatt
-p15gen1$full$CorWatt <- outliers(x, span=0.8, plot=TRUE)$repaired
+p15gen1$single$CorWatt <- outliers(x, span=0.8, plot=TRUE)$repaired
+x <- p15gen1$idle$CorWatt
+p15gen1$idle$CorWatt <- outliers(x, level=1.2, span=0.8, plot=TRUE)$repaired
 # Repair p15gen1 (PkgWatt)
 x <- p15gen1$full$PkgWatt
 p15gen1$full$PkgWatt <- outliers(x, level=0.3, span=0.5, plot=TRUE)$repaired
@@ -47,6 +49,8 @@ x <- p15gen1$main$PkgWatt
 p15gen1$main$PkgWatt <- outliers(x, span=0.5, plot=TRUE)$repaired
 x <- p15gen1$single$PkgWatt
 p15gen1$single$PkgWatt <- outliers(x, level=0.3, span=0.8, plot=TRUE)$repaired
+x <- p15gen1$idle$PkgWatt
+p15gen1$idle$PkgWatt <- outliers(x, level=0.1, span=0.8, plot=TRUE)$repaired
 dev.off()
 
 # Save RDS objects
