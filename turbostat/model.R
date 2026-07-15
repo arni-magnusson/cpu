@@ -1,8 +1,9 @@
 # Run analysis, write model results
 
-# Before: p1gen8.rds, p15gen1.rds (data)
+# Before: p1gen8.rds, p15gen1.rds, p3560.rds (data)
 # After:  p1gen8_Repairs.png, p1gen8.rds,
-#         p15gen1_Repairs.png, p15gen1.rds (model)
+#         p15gen1_Repairs.png, p15gen1.rds,
+#         p3560_Repairs.png, p3560.rds (model)
 
 library(TAF)
 source("utilities.R")
@@ -12,6 +13,7 @@ mkdir("model")
 # Read data
 p1gen8 <- readRDS("data/p1gen8.rds")
 p15gen1 <- readRDS("data/p15gen1.rds")
+p3560 <- readRDS("data/p3560.rds")
 
 taf.png("model/p1gen8_Repairs")
 par(mfrow=c(2, 3))
@@ -53,6 +55,27 @@ x <- p15gen1$idle$PkgWatt
 p15gen1$idle$PkgWatt <- outliers(x, level=0.1, span=0.8, plot=TRUE)$repaired
 dev.off()
 
+taf.png("model/p3560_Repairs")
+par(mfrow=c(2, 3))
+# Repair p3560 (CorWatt)
+x <- p3560$full$CorWatt
+p3560$full$CorWatt <- outliers(x, span=0.3, plot=TRUE)$repaired
+x <- p3560$main$CorWatt
+p3560$main$CorWatt <- outliers(x, span=0.25, plot=TRUE)$repaired
+x <- p3560$single$CorWatt
+p3560$single$CorWatt <- outliers(x, level=0.04, span=0.65, plot=TRUE)$repaired
+# Repair p3560 (PkgWatt)
+x <- p3560$full$PkgWatt
+p3560$full$PkgWatt <- outliers(x, span=0.3, plot=TRUE)$repaired
+x <- p3560$main$PkgWatt
+p3560$main$PkgWatt <- outliers(x, span=0.25, plot=TRUE)$repaired
+x <- p3560$single$PkgWatt
+p3560$single$PkgWatt <- outliers(x, level=0.04, span=0.65, plot=TRUE)$repaired
+x <- p3560$idle$PkgWatt
+p3560$idle$PkgWatt <- outliers(x, level=0.7, span=0.65, plot=TRUE)$repaired
+dev.off()
+
 # Save RDS objects
 saveRDS(p1gen8, "model/p1gen8.rds")
 saveRDS(p15gen1, "model/p15gen1.rds")
+saveRDS(p3560, "model/p3560.rds")

@@ -2,7 +2,10 @@
 
 # Before: turbo_*.dat (boot/data/lenovo_p1_gen_8),
 #         turbo_*.dat (boot/data/lenovo_p15_gen_1)
-# After: p1gen8_*.csv, p1gen8.rds, p15gen1_*.csv, p15gen1.rds (data)
+#         turbo_*.dat (boot/data/dell_precision_p3560)
+# After:  p1gen8_*.csv, p1gen8.rds,
+#         p15gen1_*.csv, p15gen1.rds,
+#         p3560_*.csv, p3560.rds (data)
 
 library(TAF)
 source("utilities.R")
@@ -20,6 +23,11 @@ p15gen1$idle <- read_turbostat("boot/data/lenovo_p15_gen_1/turbo_0.dat")
 p15gen1$single <- read_turbostat("boot/data/lenovo_p15_gen_1/turbo_1.dat")
 p15gen1$main <- read_turbostat("boot/data/lenovo_p15_gen_1/turbo_8.dat")
 p15gen1$full <- read_turbostat("boot/data/lenovo_p15_gen_1/turbo_16.dat")
+p3560 <- list()
+p3560$idle <- read_turbostat("boot/data/dell_precision_3560/turbo_0.dat")
+p3560$single <- read_turbostat("boot/data/dell_precision_3560/turbo_1.dat")
+p3560$main <- read_turbostat("boot/data/dell_precision_3560/turbo_4.dat")
+p3560$full <- read_turbostat("boot/data/dell_precision_3560/turbo_8.dat")
 
 # Write tables
 write.taf(p1gen8$idle, "data/p1gen8_idle.csv")
@@ -30,7 +38,12 @@ write.taf(p15gen1$idle, "data/p15gen1_idle.csv")
 write.taf(p15gen1$single, "data/p15gen1_single.csv")
 write.taf(p15gen1$main, "data/p15gen1_main.csv")
 write.taf(p15gen1$full, "data/p15gen1_full.csv")
+write.taf(p3560$idle, "data/p3560_idle.csv")
+write.taf(p3560$single, "data/p3560_single.csv")
+write.taf(p3560$main, "data/p3560_main.csv")
+write.taf(p3560$full, "data/p3560_full.csv")
 
 # Save RDS objects
 saveRDS(p1gen8, "data/p1gen8.rds")
 saveRDS(p15gen1, "data/p15gen1.rds")
+saveRDS(p3560, "data/p3560.rds")
