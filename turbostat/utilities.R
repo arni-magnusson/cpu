@@ -1,14 +1,14 @@
-outliers <- function(x, level=0.5, plot=FALSE, ...)
+outliers <- function(x, dist=0.5, plot=FALSE, ...)
 {
   # Fit loess model
   iter <- 1:length(x)
   trend <- loess(x~iter, ...)$fitted
 
-  # Calculate distance
-  dist <- abs(log(x) - log(trend))
+  # Calculate absolute residual
+  absresid <- abs(x - trend)
 
   # Identify outliers
-  index <- which(dist > level)
+  index <- which(absresid > dist)
   values <- x[index]
   expected <- trend[index]
 
@@ -18,7 +18,7 @@ outliers <- function(x, level=0.5, plot=FALSE, ...)
   # Plot
   if(plot)
   {
-    plot(x, ylim=lim(x))
+    plot(x)
     lines(trend, lwd=2)
     points(index, values, pch=4, cex=1.5, lwd=3, col=2)
     points(index, expected, pch=16, cex=1.5, col=3)
@@ -51,7 +51,8 @@ plot_machine <- function(machine, name,
 read_turbostat <- function(file, n=300, burn=0)
 {
   # Parse args
-  burn <- rep(burn, length=2)  # first and last rows to remove
+  if(length(burn) == 1)
+    burn <- c(burn, 0)  # first and last rows to remove
 
   # Read file
   txt <- readLines(file)
