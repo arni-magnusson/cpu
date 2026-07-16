@@ -60,6 +60,7 @@ read_turbostat <- function(file, n=300, burn=0)
 
   # Subset cols
   out <- out[c("PkgTmp", "PkgWatt")]
+  names(out) <- c("Temp", "Watt")
 
   # Subset rows
   if(burn[1] > 0)
