@@ -29,21 +29,46 @@ outliers <- function(x, dist=0.5, plot=FALSE, ...)
   out
 }
 
-plot_machine <- function(machine, name,
-                         main=paste(deparse(substitute(machine)), name),
+plot_comparison <- function(machines, state, variable, main=NULL,
+                            xlab="Iteration", ylab="", pch=1, lwd=1.5,
+                            col=c(6,2,4,3), type="p", ...)
+{
+  # Extract data
+  x <- sapply(machines, `[`, state)
+  x <- sapply(x, `[`, variable)
+  names(x) <- names(machines)
+
+  # Prepare plot elements
+  k <- length(x)
+  col <- rep(col, length=k)
+  xlim <- c(0, max(sapply(x, length)))
+  ylim <- lim(unlist(x))
+  if(is.null(main))
+    main <- paste0(variable, " (", state, ")")
+
+  # Plot
+  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
+  for(i in 1:k)
+    points(x[[i]], pch=pch, lwd=lwd, col=col[i], type=type)
+  legend("topright", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
+         inset=0.02, y.intersp=1.25)
+}
+
+plot_machine <- function(machine, variable,
+                         main=paste(deparse(substitute(machine)), variable),
                          xlab="Iteration", ylab="", pch=1, lwd=1.5,
                          col=c(8,1,4,5), type="p", ...)
 {
   # Prepare plot elements
   k <- length(machine)
   col <- rep(col, length=k)
-  xlim <- c(0, max(sapply(p1gen8, nrow)))
-  ylim <- lim(unlist(lapply(machine, `[[`, name)))
+  xlim <- c(0, max(sapply(machine, nrow)))
+  ylim <- lim(unlist(lapply(machine, `[[`, variable)))
 
   # Plot
   plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
   for(i in 1:k)
-    points(machine[[i]][[name]], pch=pch, lwd=lwd, col=col[i], type=type)
+    points(machine[[i]][[variable]], pch=pch, lwd=lwd, col=col[i], type=type)
   legend("topright", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
          bty="n", inset=0.02, y.intersp=1.25)
 }
