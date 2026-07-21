@@ -1,10 +1,12 @@
 # Prepare data, write CSV data tables
 
-# Before: turbo_*.dat (boot/data/dell_precision_m4700),
+# Before: info.csv (boot/data),
+#         turbo_*.dat (boot/data/dell_precision_m4700),
 #         turbo_*.dat (boot/data/lenovo_p1_gen_8),
 #         turbo_*.dat (boot/data/lenovo_p15_gen_1)
 #         turbo_*.dat (boot/data/dell_precision_p3560)
-# After:  m4700_*.csv, m4700.rds,
+# After:  info.csv,
+#         m4700_*.csv, m4700.rds,
 #         p1gen8_*.csv, p1gen8.rds,
 #         p15gen1_*.csv, p15gen1.rds,
 #         p3560_*.csv, p3560.rds (data)
@@ -15,6 +17,7 @@ source("utilities.R")
 mkdir("data")
 
 # Read data
+info <- read.csv("boot/data/info.csv")
 m4700 <- list()
 m4700$idle <- read_turbostat("boot/data/dell_precision_m4700/turbo_0.dat")
 m4700$single <- read_turbostat("boot/data/dell_precision_m4700/turbo_1.dat")
@@ -37,6 +40,7 @@ p3560$main <- read_turbostat("boot/data/dell_precision_3560/turbo_4.dat")
 p3560$full <- read_turbostat("boot/data/dell_precision_3560/turbo_8.dat")
 
 # Write tables
+write.taf(info, dir="data")
 write.taf(m4700$idle, "data/m4700_idle.csv")
 write.taf(m4700$single, "data/m4700_single.csv")
 write.taf(m4700$main, "data/m4700_main.csv")
