@@ -1,8 +1,8 @@
-outliers <- function(x, dist=0.5, plot=FALSE, ...)
+outliers <- function(x, span=0.75, dist=0.5, plot=FALSE, xlab="", ylab="", ...)
 {
   # Fit loess model
   iter <- 1:length(x)
-  trend <- loess(x~iter, ...)$fitted
+  trend <- loess(x~iter, span=span)$fitted
 
   # Calculate absolute residual
   absresid <- abs(x - trend)
@@ -18,8 +18,8 @@ outliers <- function(x, dist=0.5, plot=FALSE, ...)
   # Plot
   if(plot)
   {
-    plot(x)
-    lines(trend, lwd=2)
+    plot(x, xlab=xlab, ylab=ylab, ...)
+    lines(trend, lwd=2, ...)
     points(index, values, pch=4, cex=1.5, lwd=3, col=2)
     points(index, expected, pch=16, cex=1.5, col=3)
   }
@@ -85,8 +85,8 @@ read_turbostat <- function(file, n=300, burn=0)
   out <- read.table(text=txt, header=TRUE, skip=beg-1)
 
   # Subset cols
-  out <- out[c("PkgTmp", "PkgWatt")]
-  names(out) <- c("Temp", "Watt")
+  out <- out[c("Bzy_MHz", "PkgTmp", "PkgWatt")]
+  names(out) <- c("Freq", "Temp", "Watt")
 
   # Subset rows
   if(burn[1] > 0)

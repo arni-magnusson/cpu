@@ -20,7 +20,9 @@ p3560 <- readRDS("data/p3560.rds")
 taf.png("model/m4700_Repairs")
 par(mfrow=c(1, 4))
 x <- m4700$idle$Watt
-m4700$idle$Watt <- outliers(x, dist=0.5, plot=TRUE)$repaired
+m4700$idle$Watt <- outliers(x, dist=0.3, plot=TRUE, main="Idle Watt")$repaired
+x <- m4700$idle$Freq
+m4700$idle$Freq <- outliers(x, dist=600, plot=TRUE, main="Idle Freq")$repaired
 dev.off()
 
 taf.png("model/p1gen8_Repairs")
@@ -38,7 +40,7 @@ dev.off()
 taf.png("model/p3560_Repairs")
 par(mfrow=c(1, 4))
 x <- p3560$single$Watt
-p3560$single$Watt <- outliers(x, dist=0.5, span=0.3, plot=TRUE)$repaired
+p3560$single$Watt <- outliers(x, span=0.3, dist=0.5, plot=TRUE)$repaired
 x <- p3560$idle$Watt
 p3560$idle$Watt <- outliers(x, dist=5, plot=TRUE)$repaired
 dev.off()
