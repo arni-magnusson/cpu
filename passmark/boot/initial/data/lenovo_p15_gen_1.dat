@@ -1,0 +1,26 @@
+                   PassMark PerformanceTest Linux (11.0.1004)
+
+
+Intel(R) Core(TM) i7-10875H CPU @ 2.30GHz (x86_64)
+8 cores @ 2300 MHz  |  31.1 GiB RAM
+Number of Processes: 16  |  Test Iterations: 1  |  Test Duration: Medium
+--------------------------------------------------------------------------------
+CPU Mark:                          14895
+  Integer Math                     50261 Million Operations/s
+  Floating Point Math              31811 Million Operations/s
+  Prime Numbers                    59.4 Million Primes/s
+  Sorting                          26314 Thousand Strings/s
+  Encryption                       6094 MB/s
+  Compression                      195889 KB/s
+  CPU Single Threaded              2739 Million Operations/s
+  Physics                          1063 Frames/s
+  Extended Instructions (SSE)      9867 Million Matrices/s
+
+Memory Mark:                       Incomplete
+  Database Operations              0.0 Thousand Operations/s
+  Memory Read Cached               0.0 MB/s
+  Memory Read Uncached             0.0 MB/s
+  Memory Write                     0.0 MB/s
+  Available RAM                    0 Megabytes
+  Memory Latency                   0 Nanoseconds
+  Memory Threaded                  0.0 MB/s
