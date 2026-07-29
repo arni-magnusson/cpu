@@ -1,0 +1,17 @@
+                   PassMark PerformanceTest Linux (11.0.1004)
+
+
+Intel(R) Core(TM) Ultra 9 285H (x86_64)
+13 cores @ 3700 MHz  |  62.2 GiB RAM
+Number of Processes: 16  |  Test Iterations: 1  |  Test Duration: Medium
+--------------------------------------------------------------------------------
+CPU Mark:                          44576
+  Integer Math                     106986 Million Operations/s
+  Floating Point Math              129829 Million Operations/s
+  Prime Numbers                    309 Million Primes/s
+  Sorting                          61169 Thousand Strings/s
+  Encryption                       37050 MB/s
+  Compression                      456841 KB/s
+  CPU Single Threaded              4867 Million Operations/s
+  Physics                          4071 Frames/s
+  Extended Instructions (SSE)      32649 Million Matrices/s
