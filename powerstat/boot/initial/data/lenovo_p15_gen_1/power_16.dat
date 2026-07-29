@@ -2,7 +2,6 @@ Running for 400.0 seconds (400 samples at 1.0 second intervals).
 Power measurements will start in 0 seconds time.
 
   Time    User  Nice   Sys  Idle    IO  Run Ctxt/s  IRQ/s Fork Exec Exit  Watts   pkg-0   dram   core   psys   SEN3 pch_co   B0D4 INT340   SEN2   SEN4 x86_pk   SEN5 iwlwif acpitz   SEN1  CPU Freq  Freq Min  Freq Max  GPU Freq
-13:06:14  18.5   0.0   0.2  81.3   0.0   17  11507   8636   17    1    0  89.20   17.71   1.25  13.61  56.63  48.05  44.00  53.05  20.00  51.05  57.05 100.00  55.05  49.00  53.00  52.05  3.87 GHz  3.87 GHz  3.87 GHz   N/A     
 13:06:15  99.9   0.0   0.1   0.0   0.0   17    307  16968    0    0    0 242.68   64.53   1.22  60.09 116.83  48.05  43.00  53.05  20.00  51.05  57.05 100.00  55.05  49.00  53.00  52.05  3.70 GHz  3.70 GHz  3.70 GHz   N/A     
 13:06:16  99.9   0.0   0.1   0.0   0.0   17    830  17622    2    2    3 245.64   67.38   1.23  62.96 114.08  48.05  43.00  53.05  20.00  51.05  57.05 100.00  55.05  49.00  53.00  52.05  3.60 GHz  3.60 GHz  3.60 GHz   N/A     
 13:06:17  99.9   0.0   0.1   0.0   0.0   17    238  17447    0    0    0 236.37   63.15   1.22  58.72 113.28  48.05  43.00  61.05  20.00  54.05  58.05 100.00  55.05  49.00  61.00  52.05  3.60 GHz  3.60 GHz  3.60 GHz   N/A     
