@@ -1,10 +1,12 @@
 # Produce plots and tables for report
 
 # Before: info.csv (data), m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
+#         summary.csv (output)
 # After:  m4700_Temp.png, m4700_Watt.png,
 #         p1gen8_Temp.png, p1gen8_Watt.png,
 #         p15gen1_Temp.png, p15gen1_Watt.png,
-#         p3560_Temp.png, p3560_Watt.png (report)
+#         p3560_Temp.png, p3560_Watt.png,
+#         summary.csv (report)
 
 library(TAF)
 source("utilities.R")
@@ -17,6 +19,7 @@ m4700 <- readRDS("model/m4700.rds")
 p1gen8 <- readRDS("model/p1gen8.rds")
 p15gen1 <- readRDS("model/p15gen1.rds")
 p3560 <- readRDS("model/p3560.rds")
+summary <- read.taf("output/summary.csv")
 
 # Prepare plot elements
 iter <- seq(1:nrow(m4700$idle))
@@ -85,12 +88,9 @@ plot_comparison(machines, "main", "Temp")
 plot_comparison(machines, "full", "Temp")
 dev.off()
 
-# Sustained watts
-watts <- sapply(machines, `[`, "main")
-watts <- sapply(watts, `[`, "Watt")
-watts <- lapply(watts, tail, 100)
-watts <- sapply(watts, mean)
-watts <- data.frame(machine=names(machines), Watt=unname(watts))
+# Round table
+summary <- rnd(summary, grep("watt", names(summary)), 0)
+summary <- rnd(summary, grep("single|main", names(summary)), -2)
 
 # Write table
-write.taf(watts, dir="report")
+write.taf(summary, dir="report")

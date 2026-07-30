@@ -45,8 +45,41 @@ x <- p3560$idle$Watt
 p3560$idle$Watt <- outliers(x, dist=5, plot=TRUE)$repaired
 dev.off()
 
+# Combine into list
+machines <- list(m4700=m4700, p15gen1=p15gen1, p3560=p3560, p1gen8=p1gen8)
+
+# Watt
+watt <- sapply(machines, `[`, "full")
+watt <- sapply(watt, `[`, "Watt")
+watt1 <- sapply(watt, max)  # maximum spike
+watt2 <- lapply(watt, tail, 120)  # sustained
+watt2 <- sapply(watt2, mean)
+
+# Freq (single)
+single <- sapply(machines, `[`, "single")
+single <- sapply(single, `[`, "Freq")
+single1 <- lapply(single, head, 30)  # initial
+single1 <- sapply(single1, mean)
+single2 <- lapply(single, tail, 120)  # sustained
+single2 <- sapply(single2, mean)
+
+# Freq (main)
+main <- sapply(machines, `[`, "main")
+main <- sapply(main, `[`, "Freq")
+main1 <- lapply(main, head, 30)  # initial
+main1 <- sapply(main1, mean)
+main2 <- lapply(main, tail, 120)  # sustained
+main2 <- sapply(main2, mean)
+
+# Summary table
+summary <- data.frame(machine=names(machines), watt1, watt2, single1, single2,
+                      main1, main2, row.names=NULL)
+
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")
 saveRDS(p1gen8, "model/p1gen8.rds")
 saveRDS(p15gen1, "model/p15gen1.rds")
 saveRDS(p3560, "model/p3560.rds")
+
+# Save table
+write.taf(summary, dir="model")
