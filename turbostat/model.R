@@ -4,7 +4,8 @@
 # After:  m4700_Repairs.png, m4700.rds,
 #         p1gen8_Repairs.png, p1gen8.rds,
 #         p15gen1_Repairs.png, p15gen1.rds,
-#         p3560_Repairs.png, p3560.rds (model)
+#         p3560_Repairs.png, p3560.rds,
+#         summary.csv (model)
 
 library(TAF)
 source("utilities.R")
