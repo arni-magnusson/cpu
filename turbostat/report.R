@@ -90,7 +90,7 @@ dev.off()
 
 # Round table
 summary <- rnd(summary, grep("watt", names(summary)), 0)
-summary <- rnd(summary, grep("single|main", names(summary)), -2)
+summary <- rnd(summary, grep("single|main|full", names(summary)), -2)
 
 # Write table
 write.taf(summary, dir="report")
