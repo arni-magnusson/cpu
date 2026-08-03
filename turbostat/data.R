@@ -1,8 +1,8 @@
 # Prepare data, write CSV data tables
 
 # Before: info.csv (boot/data),
-#         turbo_*.dat (boot/data/dell_precision_m4700),
-#         turbo_*.dat (boot/data/lenovo_p1_gen_8),
+#         turbo_*.dat (boot/data/dell_precision_m4700)
+#         turbo_*.dat (boot/data/lenovo_p1_gen_8)
 #         turbo_*.dat (boot/data/lenovo_p15_gen_1)
 #         turbo_*.dat (boot/data/dell_precision_p3560)
 # After:  info.csv,
