@@ -97,7 +97,7 @@ summary <- div(summary, grep("single|main|full", names(summary)))
 # Compact description
 desc <- data.frame(machine=summary$machine,
                    freq=paste0(summary$full2, "-", summary$single2),
-                   watt=paste0(summary$watt2, "W"))
+                   watt=paste0(summary$watt2, "-", summary$watt1, "W"))
 
 # Write table
 write.taf(desc, dir="report")
