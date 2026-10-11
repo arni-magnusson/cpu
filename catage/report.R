@@ -16,7 +16,8 @@ catage$machine <- reorder(catage$machine, catage$speed, median)
 # Barplot
 taf.png("speed")
 barplot(xtabs(speed~job+machine, catage), beside=TRUE, legend=TRUE,
-        args.legend=list(x="topleft", bty="n", inset=0.02))
+        args.legend=list(x="topleft", bty="n", inset=0.02),
+        ylab="Speed (model iterations per second)")
 dev.off()
 
 # Prepare summary table
