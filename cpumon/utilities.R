@@ -1,74 +1,37 @@
-outliers <- function(x, span=0.75, dist=0.5, plot=FALSE, xlab="", ylab="", ...)
+means <- function(x, round=TRUE)
 {
-  # Fit loess model
-  iter <- 1:length(x)
-  trend <- loess(x~iter, span=span)$fitted
-
-  # Calculate absolute residual
-  absresid <- abs(x - trend)
-
-  # Identify outliers
-  index <- which(absresid > dist)
-  values <- x[index]
-  expected <- trend[index]
-
-  # Repair outliers
-  repaired <- replace(x, index, expected)
-
-  # Plot
-  if(plot)
+  freq <- sapply(x[grep("Freq", names(x))], mean)
+  temp <- sapply(x[grep("Temp", names(x))], mean)
+  fan <- sapply(x[grep("Fan", names(x))], mean)
+  if(round)
   {
-    plot(x, xlab=xlab, ylab=ylab, ...)
-    lines(trend, lwd=2, ...)
-    points(index, values, pch=4, cex=1.5, lwd=3, col=2)
-    points(index, expected, pch=16, cex=1.5, col=3)
+    freq <- round(freq, -2)
+    temp <- round(temp)
+    fan <- round(fan, -2)
   }
+  c(freq, temp, fan)
+}
 
-  out <- list(trend=trend, repaired=repaired, index=index, values=values,
-              expected=expected)
+performance <- function(x, machine=deparse(substitute(x)))
+{
+  peak <- function(y)
+  {
+    c(freq=round(mean(y$Freq1), -2),
+      temp=round(mean(y$Temp1)),
+      fan=round(mean(y$Fan1), -2))
+  }
+  out <- sapply(x, peak)
+  out <- xtab2taf(t(out), "load")
+  out <- data.frame(machine=machine, out)
   out
 }
 
-plot_comparison <- function(machines, state, variable, main=NULL,
-                            xlab="Iteration", ylab="", pch=1, lwd=1.5,
-                            col=c(6,2,4,3), type="p", ...)
+remove.first <- function(x, n=0, max.time=300)
 {
-  # Extract data
-  x <- sapply(machines, `[`, state)
-  x <- sapply(x, `[`, variable)
-  names(x) <- names(machines)
-
-  # Prepare plot elements
-  k <- length(x)
-  col <- rep(col, length=k)
-  xlim <- c(0, max(sapply(x, length)))
-  ylim <- lim(unlist(x))
-  if(is.null(main))
-    main <- paste0(variable, " (", state, ")")
-
-  # Plot
-  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
-  for(i in 1:k)
-    points(x[[i]], pch=pch, lwd=lwd, col=col[i], type=type)
-  legend("topright", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
-         inset=0.02, y.intersp=1.25)
-}
-
-plot_machine <- function(machine, variable,
-                         main=paste(deparse(substitute(machine)), variable),
-                         xlab="Iteration", ylab="", pch=1, lwd=1.5,
-                         col=c(8,1,4,5), type="p", ...)
-{
-  # Prepare plot elements
-  k <- length(machine)
-  col <- rep(col, length=k)
-  xlim <- c(0, max(sapply(machine, nrow)))
-  ylim <- lim(unlist(lapply(machine, `[[`, variable)))
-
-  # Plot
-  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
-  for(i in 1:k)
-    points(machine[[i]][[variable]], pch=pch, lwd=lwd, col=col[i], type=type)
-  legend("topright", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
-         bty="n", inset=0.02, y.intersp=1.25)
+  if(n >= 1)
+    x <- x[-seq_len(n),]
+  x$Time <- x$Time - min(x$Time)
+  x <- x[x$Time <= max.time,]
+  row.names(x) <- NULL
+  x
 }
