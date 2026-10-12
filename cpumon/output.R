@@ -2,7 +2,7 @@
 
 # Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds, results.rds,
 #         summary.csv (model)
-# After:  m4700*.csv, p1gen8*.csv, p15gen1*.csv, p3560*.csv,
+# After:  m4700_*.csv, p1gen8_*.csv, p15gen1_*.csv, p3560_*.csv,
 #         summary.csv (output)
 
 library(TAF)
@@ -38,7 +38,7 @@ write.taf(p3560$main, "output/p3560_main.csv")
 write.taf(p3560$full, "output/p3560_full.csv")
 
 # Write results averaging over time
-write.taf(results$m4700, dir="output")
-write.taf(results$p1gen8, dir="output")
-write.taf(results$p15gen1, dir="output")
-write.taf(results$p3560, dir="output")
+write.taf(results$m4700, "output/m4700_results.csv")
+write.taf(results$p1gen8, "output/p1gen8_results.csv")
+write.taf(results$p15gen1, "output/p15gen1_results.csv")
+write.taf(results$p3560, "output/p3560_results.csv")
