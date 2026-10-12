@@ -14,7 +14,7 @@ means <- function(x, round=TRUE)
 
 plot_machine <- function(machine, variable,
                          main=paste(deparse(substitute(machine)), variable),
-                         xlab="Time", ylab="", pch=1, lwd=1.5,
+                         xlab="Iteration", ylab="", pch=1, lwd=1.5,
                          col=c(8,1,4,5), type="p", ...)
 {
   # Prepare variable and variable1
@@ -34,12 +34,10 @@ plot_machine <- function(machine, variable,
          bty="n", inset=0.02, y.intersp=1.25)
 }
 
-remove_first <- function(x, n=0, max.time=300)
+remove_first <- function(x, burn=0, length=300)
 {
-  if(n >= 1)
-    x <- x[-seq_len(n),]
+  x <- x[(1:length)+burn,]
   x$Time <- x$Time - min(x$Time)
-  x <- x[x$Time <= max.time,]
   row.names(x) <- NULL
   x
 }

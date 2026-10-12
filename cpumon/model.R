@@ -15,11 +15,11 @@ p1gen8 <- readRDS("data/p1gen8.rds")
 p15gen1 <- readRDS("data/p15gen1.rds")
 p3560 <- readRDS("data/p3560.rds")
 
-# Remove first measurements, keep 3 minutes of measurements
-m4700 <- mapply(remove_first, m4700, n=c(3,1,1,1), SIMPLIFY=FALSE)
-p1gen8 <- mapply(remove_first, p1gen8, n=c(0,1,1,1), SIMPLIFY=FALSE)
-p15gen1 <- mapply(remove_first, p15gen1, n=c(0,0,0,1), SIMPLIFY=FALSE)
-p3560 <- mapply(remove_first, p3560, n=c(0,0,1,0), SIMPLIFY=FALSE)
+# Remove first measurements, keep 300 measurements
+m4700 <- mapply(remove_first, m4700, burn=c(3,1,1,1), SIMPLIFY=FALSE)
+p1gen8 <- mapply(remove_first, p1gen8, burn=c(0,1,1,1), SIMPLIFY=FALSE)
+p15gen1 <- mapply(remove_first, p15gen1, burn=c(0,0,0,1), SIMPLIFY=FALSE)
+p3560 <- mapply(remove_first, p3560, burn=c(0,0,1,0), SIMPLIFY=FALSE)
 
 # Calculate results averaging over time
 results <- list(m4700=sapply(m4700, means),
