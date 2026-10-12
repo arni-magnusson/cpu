@@ -2,12 +2,7 @@
 
 # Before: info.csv (data), m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
 #         summary.csv (output)
-# After:  desc.csv,
-#         m4700_Temp.png, m4700_Watt.png,
-#         p1gen8_Temp.png, p1gen8_Watt.png,
-#         p15gen1_Temp.png, p15gen1_Watt.png,
-#         p3560_Temp.png, p3560_Watt.png,
-#         summary.csv (report)
+# After:  comparison.pdf, desc.csv, each.pdf, summary.csv (report)
 
 library(TAF)
 source("utilities.R")
