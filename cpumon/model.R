@@ -21,7 +21,7 @@ p1gen8 <- mapply(remove.first, p1gen8, n=c(0,0,1,1), SIMPLIFY=FALSE)
 p15gen1 <- mapply(remove.first, p15gen1, n=c(0,0,0,1), SIMPLIFY=FALSE)
 p3560 <- mapply(remove.first, p3560, n=c(0,0,1,0), SIMPLIFY=FALSE)
 
-# Calculate detailed results
+# Calculate results averaging over time
 results <- list(m4700=sapply(m4700, means),
                 p1gen8=sapply(p1gen8, means),
                 p15gen1=sapply(p15gen1, means),
