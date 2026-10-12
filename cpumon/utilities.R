@@ -51,7 +51,7 @@ summary_machine <- function(x, machine=deparse(substitute(x)))
       fan=round(mean(y$Fan1), -2))
   }
   out <- sapply(x, peak)
-  out <- xtab2taf(t(out), "load")
+  out <- xtab2taf(t(out), "state")
   out <- data.frame(machine=machine, out)
   out
 }
