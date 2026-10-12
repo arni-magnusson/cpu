@@ -56,7 +56,7 @@ smooth_p3560$single$Watt <- loess(stable~iter, span=0.30)$fitted
 smooth_p3560$idle <- mean(p3560$idle$Watt)
 
 # Plot each machine
-pdf("report/each.pdf", width=16, heigh=10)
+pdf("report/each.pdf", width=12, heigh=8)
 par(mfrow=c(3,4))
 plot_machine(m4700, "Freq")
 plot_machine(p15gen1, "Freq")

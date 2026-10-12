@@ -50,7 +50,7 @@ plot_comparison <- function(machines, state, variable, main=NULL,
   plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
   for(i in 1:k)
     points(x[[i]], pch=pch, lwd=lwd, col=col[i], type=type)
-  legend("topright", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
+  legend("bottomleft", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
          inset=0.02, y.intersp=1.25)
 }
 
@@ -69,7 +69,7 @@ plot_machine <- function(machine, variable,
   plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
   for(i in 1:k)
     points(machine[[i]][[variable]], pch=pch, lwd=lwd, col=col[i], type=type)
-  legend("topright", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
+  legend("bottomleft", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
          bty="n", inset=0.02, y.intersp=1.25)
 }
 
