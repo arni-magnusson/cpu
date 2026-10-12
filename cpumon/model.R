@@ -28,10 +28,10 @@ results <- list(m4700=sapply(m4700, means),
                 p3560=sapply(p3560, means))
 
 # Calculate summary table
-summary <- rbind(performance(m4700),
-                 performance(p1gen8),
-                 performance(p15gen1),
-                 performance(p3560))
+summary <- rbind(get.summary(m4700),
+                 get.summary(p1gen8),
+                 get.summary(p15gen1),
+                 get.summary(p3560))
 
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")

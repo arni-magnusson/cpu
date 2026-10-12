@@ -12,7 +12,7 @@ means <- function(x, round=TRUE)
   c(freq, temp, fan)
 }
 
-performance <- function(x, machine=deparse(substitute(x)))
+get.summary <- function(x, machine=deparse(substitute(x)))
 {
   peak <- function(y)
   {
