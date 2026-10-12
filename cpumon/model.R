@@ -5,7 +5,7 @@
 #         summary.csv (model)
 
 library(TAF)
-source("utilities.R")  # means, remove.first
+source("utilities.R")  # means, remove_first, summary_machine
 
 mkdir("model")
 
@@ -16,10 +16,10 @@ p15gen1 <- readRDS("data/p15gen1.rds")
 p3560 <- readRDS("data/p3560.rds")
 
 # Remove first measurements, keep 3 minutes of measurements
-m4700 <- mapply(remove.first, m4700, n=c(3,1,0,0), SIMPLIFY=FALSE)
-p1gen8 <- mapply(remove.first, p1gen8, n=c(0,0,1,1), SIMPLIFY=FALSE)
-p15gen1 <- mapply(remove.first, p15gen1, n=c(0,0,0,1), SIMPLIFY=FALSE)
-p3560 <- mapply(remove.first, p3560, n=c(0,0,1,0), SIMPLIFY=FALSE)
+m4700 <- mapply(remove_first, m4700, n=c(3,1,0,0), SIMPLIFY=FALSE)
+p1gen8 <- mapply(remove_first, p1gen8, n=c(0,0,1,1), SIMPLIFY=FALSE)
+p15gen1 <- mapply(remove_first, p15gen1, n=c(0,0,0,1), SIMPLIFY=FALSE)
+p3560 <- mapply(remove_first, p3560, n=c(0,0,1,0), SIMPLIFY=FALSE)
 
 # Calculate results averaging over time
 results <- list(m4700=sapply(m4700, means),
@@ -28,10 +28,10 @@ results <- list(m4700=sapply(m4700, means),
                 p3560=sapply(p3560, means))
 
 # Calculate summary table
-summary <- rbind(get.summary(m4700),
-                 get.summary(p1gen8),
-                 get.summary(p15gen1),
-                 get.summary(p3560))
+summary <- rbind(summary_machine(m4700),
+                 summary_machine(p1gen8),
+                 summary_machine(p15gen1),
+                 summary_machine(p3560))
 
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")

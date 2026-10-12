@@ -12,7 +12,17 @@ means <- function(x, round=TRUE)
   c(freq, temp, fan)
 }
 
-get.summary <- function(x, machine=deparse(substitute(x)))
+remove_first <- function(x, n=0, max.time=300)
+{
+  if(n >= 1)
+    x <- x[-seq_len(n),]
+  x$Time <- x$Time - min(x$Time)
+  x <- x[x$Time <= max.time,]
+  row.names(x) <- NULL
+  x
+}
+
+summary_machine <- function(x, machine=deparse(substitute(x)))
 {
   peak <- function(y)
   {
@@ -24,14 +34,4 @@ get.summary <- function(x, machine=deparse(substitute(x)))
   out <- xtab2taf(t(out), "load")
   out <- data.frame(machine=machine, out)
   out
-}
-
-remove.first <- function(x, n=0, max.time=300)
-{
-  if(n >= 1)
-    x <- x[-seq_len(n),]
-  x$Time <- x$Time - min(x$Time)
-  x <- x[x$Time <= max.time,]
-  row.names(x) <- NULL
-  x
 }
