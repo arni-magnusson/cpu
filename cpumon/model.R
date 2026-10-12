@@ -16,8 +16,8 @@ p15gen1 <- readRDS("data/p15gen1.rds")
 p3560 <- readRDS("data/p3560.rds")
 
 # Remove first measurements, keep 3 minutes of measurements
-m4700 <- mapply(remove_first, m4700, n=c(3,1,0,0), SIMPLIFY=FALSE)
-p1gen8 <- mapply(remove_first, p1gen8, n=c(0,0,1,1), SIMPLIFY=FALSE)
+m4700 <- mapply(remove_first, m4700, n=c(3,1,1,1), SIMPLIFY=FALSE)
+p1gen8 <- mapply(remove_first, p1gen8, n=c(0,1,1,1), SIMPLIFY=FALSE)
 p15gen1 <- mapply(remove_first, p15gen1, n=c(0,0,0,1), SIMPLIFY=FALSE)
 p3560 <- mapply(remove_first, p3560, n=c(0,0,1,0), SIMPLIFY=FALSE)
 
