@@ -12,6 +12,25 @@ means <- function(x, round=TRUE)
   c(freq, temp, fan)
 }
 
+plot_machine <- function(machine, variable,
+                         main=paste(deparse(substitute(machine)), variable),
+                         xlab="Iteration", ylab="", pch=1, lwd=1.5,
+                         col=c(8,1,4,5), type="p", ...)
+{
+  # Prepare plot elements
+  k <- length(machine)
+  col <- rep(col, length=k)
+  xlim <- c(0, max(sapply(machine, nrow)))
+  ylim <- lim(unlist(lapply(machine, `[[`, variable)))
+
+  # Plot
+  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
+  for(i in 1:k)
+    points(machine[[i]][[variable]], pch=pch, lwd=lwd, col=col[i], type=type)
+  legend("bottomleft", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
+         bty="n", inset=0.02, y.intersp=1.25)
+}
+
 remove_first <- function(x, n=0, max.time=300)
 {
   if(n >= 1)
