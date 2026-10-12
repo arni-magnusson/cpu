@@ -1,7 +1,7 @@
 # Produce plots and tables for report
 
 # Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (data)
-# After:
+# After:  each.pdf (report)
 
 library(TAF)
 source("utilities.R")
@@ -14,15 +14,19 @@ p1gen8 <- readRDS("model/p1gen8.rds")
 p15gen1 <- readRDS("model/p15gen1.rds")
 p3560 <- readRDS("model/p3560.rds")
 
-
-plot_machine <- function(machine, variable,
-                         main=paste(deparse(substitute(machine)), variable),
-                         xlab="Time", ylab="", pch=1, lwd=1.5,
-                         col=c(8,1,4,5), type="p", ...)
-{
-  x <- lapply(machine, `[`, c("Time", variable))
-  plot(NA, xlim=c(0,300), ylim=lim(x$single[[variable]]), xlab=xlab, ylab=ylab)
-  mapply(points, x, col=col)
-  legend("bottomleft", rev(names(machine)), pch=pch, pt.lwd=lwd, col=rev(col),
-         bty="n", inset=0.02, y.intersp=1.25)
-}
+# Plot each machine
+pdf("report/each.pdf", width=12, height=8)
+par(mfrow=c(3,4))
+plot_machine(m4700, "Freq")
+plot_machine(p15gen1, "Freq")
+plot_machine(p3560, "Freq")
+plot_machine(p1gen8, "Freq")
+plot_machine(m4700, "Fan")
+plot_machine(p15gen1, "Fan")
+plot_machine(p3560, "Fan")
+plot_machine(p1gen8, "Fan")
+plot_machine(m4700, "Temp")
+plot_machine(p15gen1, "Temp")
+plot_machine(p3560, "Temp")
+plot_machine(p1gen8, "Temp")
+dev.off()
