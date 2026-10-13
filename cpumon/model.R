@@ -1,8 +1,7 @@
 # Run analysis, write model results
 
 # Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (data)
-# After:  m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds, results.rds,
-#         summary.csv (model)
+# After:  m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds, summary.csv (model)
 
 library(TAF)
 source("utilities.R")  # means, remove_first, summary_machine
@@ -52,24 +51,41 @@ p15gen1$single$Freq1 <- c(4693, 4690)
 p15gen1$single$Temp1 <- c(100, 100)
 p15gen1$single$Fan1 <- c(3937, 3938)
 
-# Calculate results averaging over time
-results <- list(m4700=sapply(m4700, means),
-                p1gen8=sapply(p1gen8, means),
-                p15gen1=sapply(p15gen1, means),
-                p3560=sapply(p3560, means))
+# Combine into list
+machines <- list(m4700=m4700, p15gen1=p15gen1, p3560=p3560, p1gen8=p1gen8)
 
-# Calculate summary table
-summary <- rbind(summary_machine(m4700),
-                 summary_machine(p1gen8),
-                 summary_machine(p15gen1),
-                 summary_machine(p3560))
+# Freq (single)
+single <- sapply(machines, `[`, "single")
+single <- sapply(single, `[`, "Freq1")
+single1 <- lapply(single, head, 30)  # initial
+single1 <- sapply(single1, mean)
+single2 <- lapply(single, tail, 120)  # sustained
+single2 <- sapply(single2, mean)
 
+# Freq (main)
+main <- sapply(machines, `[`, "main")
+main <- sapply(main, `[`, "Freq1")
+main1 <- lapply(main, head, 30)  # initial
+main1 <- sapply(main1, mean)
+main2 <- lapply(main, tail, 120)  # sustained
+main2 <- sapply(main2, mean)
+
+# Freq (full)
+full <- sapply(machines, `[`, "full")
+full <- sapply(full, `[`, "Freq1")
+full1 <- lapply(full, head, 30)  # initial
+full1 <- sapply(full1, mean)
+full2 <- lapply(full, tail, 120)  # sustained
+full2 <- sapply(full2, mean)
+
+# Summary table
+summary <- data.frame(machine=names(machines), single1, single2, main1, main2,
+                      full1, full2, row.names=NULL)
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")
 saveRDS(p1gen8, "model/p1gen8.rds")
 saveRDS(p15gen1, "model/p15gen1.rds")
 saveRDS(p3560, "model/p3560.rds")
-saveRDS(results, "model/results.rds")
 
 # Write table
 write.taf(summary, dir="model")
