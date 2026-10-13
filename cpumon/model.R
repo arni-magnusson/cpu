@@ -54,6 +54,13 @@ p15gen1$single$Fan1 <- c(3937, 3938)
 # Combine into list
 machines <- list(m4700=m4700, p15gen1=p15gen1, p3560=p3560, p1gen8=p1gen8)
 
+# Freq (idle)
+idle <- sapply(machines, `[`, "idle")
+idle1 <- sapply(idle, `[`, "Freq4")
+idle1 <- sapply(idle1, mean, na.rm=TRUE)
+idle2 <- sapply(idle, `[`, "Freq1")
+idle2 <- sapply(idle2, mean)
+
 # Freq (single)
 single <- sapply(machines, `[`, "single")
 single <- sapply(single, `[`, "Freq1")
@@ -64,7 +71,7 @@ single2 <- sapply(single2, mean)
 
 # Freq (main)
 main <- sapply(machines, `[`, "main")
-main <- sapply(main, `[`, "Freq1")
+main <- sapply(main, `[`, "Freq4")
 main1 <- lapply(main, head, 30)  # initial
 main1 <- sapply(main1, mean)
 main2 <- lapply(main, tail, 120)  # sustained
@@ -72,15 +79,15 @@ main2 <- sapply(main2, mean)
 
 # Freq (full)
 full <- sapply(machines, `[`, "full")
-full <- sapply(full, `[`, "Freq1")
+full <- sapply(full, `[`, "Freq4")
 full1 <- lapply(full, head, 30)  # initial
 full1 <- sapply(full1, mean)
 full2 <- lapply(full, tail, 120)  # sustained
 full2 <- sapply(full2, mean)
 
 # Summary table
-summary <- data.frame(machine=names(machines), single1, single2, main1, main2,
-                      full1, full2, row.names=NULL)
+summary <- data.frame(machine=names(machines), idle1, idle2, single1, single2,
+                      main1, main2, full1, full2, row.names=NULL)
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")
 saveRDS(p1gen8, "model/p1gen8.rds")

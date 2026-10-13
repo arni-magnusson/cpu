@@ -56,11 +56,18 @@ plot_comparison(machines, "full", "Fan")
 dev.off()
 
 # Round and divide values
-summary <- rnd(summary, grep("single|main|full", names(summary)), -2)
-summary <- div(summary, grep("single|main|full", names(summary)))
-summary <- rnd(summary, grep("watt", names(summary)))
+summary <- rnd(summary, grep("idle|single|main|full", names(summary)), -2)
+summary <- div(summary, grep("idle|single|main|full", names(summary)))
 
 # Compact description
 desc <- data.frame(machine=summary$machine,
-                   freq=paste0(format(summary$full2), "-",
-                               format(summary$single2)))
+                   rest=paste0(format(summary$idle1), "-",
+                               format(summary$idle2)),
+                   work=paste0(format(summary$main2), "-",
+                               format(summary$single2)),
+                   spec=paste0(format(info$freq), "-",
+                               format(info$turbo)))
+
+# Write tables
+write.taf(desc, dir="report")
+write.taf(summary, dir="report")
