@@ -12,6 +12,35 @@ means <- function(x, round=TRUE)
   c(freq, temp, fan)
 }
 
+plot_comparison <- function(machines, state, variable, main=NULL,
+                            xlab="Iteration", ylab="", pch=1, lwd=1.5,
+                            col=c(6,2,4,3), type="p", ...)
+{
+  # Prepare variable and variable1
+  variable <- gsub("[0-9]", "", variable)  # Freq
+  variable1 <- paste0(variable, "1")       # Freq1
+
+  # Extract data
+  x <- sapply(machines, `[`, state)
+  x <- sapply(x, `[`, variable1)
+  names(x) <- names(machines)
+
+  # Prepare plot elements
+  k <- length(x)
+  col <- rep(col, length=k)
+  xlim <- c(0, max(sapply(x, length)))
+  ylim <- lim(unlist(x))
+  if(is.null(main))
+    main <- paste0(variable, " (", state, ")")
+
+  # Plot
+  plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
+  for(i in 1:k)
+    points(x[[i]], pch=pch, lwd=lwd, col=col[i], type=type)
+  legend("bottomleft", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
+         inset=0.02, y.intersp=1.25)
+}
+
 plot_machine <- function(machine, variable,
                          main=paste(deparse(substitute(machine)), variable),
                          xlab="Iteration", ylab="", pch=1, lwd=1.5,

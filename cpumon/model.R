@@ -19,7 +19,7 @@ p3560 <- readRDS("data/p3560.rds")
 m4700 <- mapply(remove_first, m4700, burn=c(3,1,1,1), SIMPLIFY=FALSE)
 p1gen8 <- mapply(remove_first, p1gen8, burn=c(0,1,1,1), SIMPLIFY=FALSE)
 p15gen1 <- mapply(remove_first, p15gen1, burn=c(0,0,0,1), SIMPLIFY=FALSE)
-p3560 <- mapply(remove_first, p3560, burn=c(0,0,1,0), SIMPLIFY=FALSE)
+p3560 <- mapply(remove_first, p3560, burn=c(0,1,1,0), SIMPLIFY=FALSE)
 
 # Prepare p15gen1 repairs
 na.begin <- 257
@@ -33,12 +33,6 @@ set.seed(2)
 freq.noise <- sample(freq.measurements, na.count)
 p15gen1$idle$Freq1[na.begin:300] <- freq.noise
 
-# Repair p15gen1$idle$Fan1
-steady.fan.begin <- 234
-fan.measurements <- p15gen1$idle$Fan1[steady.fan.begin:(na.begin-1)]
-fan.noise <- sample(fan.measurements, na.count, replace=TRUE)
-p15gen1$idle$Fan1[na.begin:300] <- fan.noise
-
 # Repair p15gen1$idle$Temp1
 cool.begin <- 228
 temp.coef <- coef(lm(Temp1~iter, p15gen1$idle, subset=cool.begin:na.begin))
@@ -47,11 +41,17 @@ set.seed(0)
 temp.noise <- round(temp.fit + rnorm(300, 0, 0.3))
 p15gen1$idle$Temp1[na.begin:300] <- temp.noise[na.begin:300]
 
+# Repair p15gen1$idle$Fan1
+steady.fan.begin <- 234
+fan.measurements <- p15gen1$idle$Fan1[steady.fan.begin:(na.begin-1)]
+fan.noise <- sample(fan.measurements, na.count, replace=TRUE)
+p15gen1$idle$Fan1[na.begin:300] <- fan.noise
+
 # Repair p15gen1$single
 tail(p15gen1$single, 10)
 p15gen1$single$Freq1 <- c(4693, 4690)
-p15gen1$single$Fan1 <- c(3937, 3938)
 p15gen1$single$Temp1 <- c(100, 100)
+p15gen1$single$Fan1 <- c(3937, 3938)
 
 # Calculate results averaging over time
 results <- list(m4700=sapply(m4700, means),
