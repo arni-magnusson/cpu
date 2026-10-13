@@ -1,14 +1,8 @@
-means <- function(x, round=TRUE)
+means <- function(x)
 {
   freq <- sapply(x[grep("Freq", names(x))], mean)
   temp <- sapply(x[grep("Temp", names(x))], mean)
   fan <- sapply(x[grep("Fan", names(x))], mean)
-  if(round)
-  {
-    freq <- round(freq, -2)
-    temp <- round(temp)
-    fan <- round(fan, -2)
-  }
   c(freq, temp, fan)
 }
 
@@ -37,8 +31,8 @@ plot_comparison <- function(machines, state, variable, main=NULL,
   plot(NA, xlim=xlim, ylim=ylim, main=main, xlab=xlab, ylab=ylab, ...)
   for(i in 1:k)
     points(x[[i]], pch=pch, lwd=lwd, col=col[i], type=type)
-  legend("bottomleft", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col), bty="n",
-         inset=0.02, y.intersp=1.25)
+  legend("bottomleft", rev(names(x)), pch=pch, pt.lwd=lwd, col=rev(col),
+         bty="n", inset=0.02, y.intersp=1.25)
 }
 
 plot_machine <- function(machine, variable,
@@ -75,9 +69,9 @@ summary_machine <- function(x, machine=deparse(substitute(x)))
 {
   peak <- function(y)
   {
-    c(freq=round(mean(y$Freq1), -2),
-      temp=round(mean(y$Temp1)),
-      fan=round(mean(y$Fan1), -2))
+    c(freq=mean(y$Freq1),
+      temp=mean(y$Temp1),
+      fan=mean(y$Fan1))
   }
   out <- sapply(x, peak)
   out <- xtab2taf(t(out), "state")
