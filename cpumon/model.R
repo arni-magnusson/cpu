@@ -48,7 +48,6 @@ fan.noise <- sample(fan.measurements, na.count, replace=TRUE)
 p15gen1$idle$Fan1[na.begin:300] <- fan.noise
 
 # Repair p15gen1$single
-tail(p15gen1$single, 10)
 p15gen1$single$Freq1 <- c(4693, 4690)
 p15gen1$single$Temp1 <- c(100, 100)
 p15gen1$single$Fan1 <- c(3937, 3938)
