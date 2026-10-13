@@ -20,10 +20,10 @@ p3560 <- readRDS("data/p3560.rds")
 
 taf.png("model/m4700_Repairs")
 par(mfrow=c(1, 4))
-x <- m4700$idle$Watt
-m4700$idle$Watt <- outliers(x, dist=0.3, plot=TRUE, main="Idle Watt")$repaired
 x <- m4700$idle$Freq
 m4700$idle$Freq <- outliers(x, dist=600, plot=TRUE, main="Idle Freq")$repaired
+x <- m4700$idle$Watt
+m4700$idle$Watt <- outliers(x, dist=0.3, plot=TRUE, main="Idle Watt")$repaired
 dev.off()
 
 taf.png("model/p1gen8_Repairs")
@@ -49,13 +49,6 @@ dev.off()
 # Combine into list
 machines <- list(m4700=m4700, p15gen1=p15gen1, p3560=p3560, p1gen8=p1gen8)
 
-# Watt
-watt <- sapply(machines, `[`, "full")
-watt <- sapply(watt, `[`, "Watt")
-watt1 <- sapply(watt, max)  # maximum spike
-watt2 <- lapply(watt, tail, 120)  # sustained
-watt2 <- sapply(watt2, mean)
-
 # Freq (single)
 single <- sapply(machines, `[`, "single")
 single <- sapply(single, `[`, "Freq")
@@ -72,13 +65,20 @@ main1 <- sapply(main1, mean)
 main2 <- lapply(main, tail, 120)  # sustained
 main2 <- sapply(main2, mean)
 
-# Freq (main)
+# Freq (full)
 full <- sapply(machines, `[`, "full")
 full <- sapply(full, `[`, "Freq")
 full1 <- lapply(full, head, 30)  # initial
 full1 <- sapply(full1, mean)
 full2 <- lapply(full, tail, 120)  # sustained
 full2 <- sapply(full2, mean)
+
+# Watt
+watt <- sapply(machines, `[`, "full")
+watt <- sapply(watt, `[`, "Watt")
+watt1 <- sapply(watt, max)  # maximum spike
+watt2 <- lapply(watt, tail, 120)  # sustained
+watt2 <- sapply(watt2, mean)
 
 # Summary table
 summary <- data.frame(machine=names(machines), watt1, watt2, single1, single2,
