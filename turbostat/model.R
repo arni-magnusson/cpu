@@ -49,6 +49,11 @@ dev.off()
 # Combine into list
 machines <- list(m4700=m4700, p15gen1=p15gen1, p3560=p3560, p1gen8=p1gen8)
 
+# Freq (idle)
+idle <- sapply(machines, `[`, "idle")
+idle <- sapply(idle, `[`, "Freq")
+idle <- sapply(idle, mean)
+
 # Freq (single)
 single <- sapply(machines, `[`, "single")
 single <- sapply(single, `[`, "Freq")
@@ -76,13 +81,16 @@ full2 <- sapply(full2, mean)
 # Watt
 watt <- sapply(machines, `[`, "full")
 watt <- sapply(watt, `[`, "Watt")
+watt0 <- sapply(machines, `[`, "idle")
+watt0 <- sapply(watt0, `[`, "Watt")
+watt0 <- sapply(watt0, mean)
 watt1 <- sapply(watt, max)  # maximum spike
 watt2 <- lapply(watt, tail, 120)  # sustained
 watt2 <- sapply(watt2, mean)
 
 # Summary table
-summary <- data.frame(machine=names(machines), watt1, watt2, single1, single2,
-                      main1, main2, full1, full2, row.names=NULL)
+summary <- data.frame(machine=names(machines), idle, single1, single2, main1,
+                      main2, full1, full2, watt0, watt1, watt2, row.names=NULL)
 
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")

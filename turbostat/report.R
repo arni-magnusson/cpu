@@ -85,14 +85,18 @@ plot_comparison(machines, "full", "Watt")
 dev.off()
 
 # Round and divide values
-summary <- rnd(summary, grep("single|main|full", names(summary)), -2)
-summary <- div(summary, grep("single|main|full", names(summary)))
+summary <- rnd(summary, grep("idle|single|main|full", names(summary)), -2)
+summary <- div(summary, grep("idle|single|main|full", names(summary)))
 summary <- rnd(summary, grep("watt", names(summary)))
 
 # Compact description
 desc <- data.frame(machine=summary$machine,
-                   freq=paste0(summary$full2, "-", summary$single2),
-                   watt=paste0(summary$watt2, "-", summary$watt1, "W"))
+                   freq.idle=summary$idle,
+                   freq.work=paste0(summary$full2, "-", summary$single2),
+                   watt.idle=paste0(summary$watt0, "W"),
+                   watt.work=paste0(summary$watt2, "-", summary$watt1, "W"),
+                   spec=paste0(info$freq, "-", info$turbo),
+                   tdp=paste0(info$watt, "W"))
 
 # Write table
 write.taf(desc, dir="report")
