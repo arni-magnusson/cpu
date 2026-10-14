@@ -68,7 +68,7 @@ plot_machine(p1gen8, "Watt")
 dev.off()
 
 # Plot machine comparison
-pdf("report/comparison.pdf", width=12, heigh=8)
+pdf("report/comparison.pdf", width=12, height=8)
 par(mfrow=c(3,4))
 plot_comparison(machines, "idle", "Freq")
 plot_comparison(machines, "single", "Freq")
