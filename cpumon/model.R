@@ -85,10 +85,31 @@ full1 <- sapply(full1, mean)
 full2 <- lapply(full, tail, 120)  # sustained
 full2 <- sapply(full2, mean)
 
+# Differences between cores
+cores <- list(m4700=data.frame(idle=colMeans(m4700$idle[1+(1:4)]),
+                               single=colMeans(m4700$single[1+(1:4)]),
+                               main=colMeans(m4700$main[1+(1:4)]),
+                               full=colMeans(m4700$full[1+(1:4)])),
+              p1gen8=data.frame(idle=colMeans(p1gen8$idle[1+(1:16)]),
+                                single=colMeans(p1gen8$single[1+(1:16)]),
+                                main=colMeans(p1gen8$main[1+(1:16)]),
+                                full=colMeans(p1gen8$full[1+(1:16)])),
+              p15gen1=data.frame(idle=colMeans(p15gen1$idle[1+(1:8)],
+                                               na.rm=TRUE),
+                                 single=colMeans(p15gen1$single[1+(1:8)],
+                                                 na.rm=TRUE),
+                                 main=colMeans(p15gen1$main[1+(1:8)]),
+                                 full=colMeans(p15gen1$full[1+(1:8)])),
+              p3560=data.frame(idle=colMeans(p3560$idle[1+(1:4)]),
+                               single=colMeans(p3560$single[1+(1:4)]),
+                               main=colMeans(p3560$main[1+(1:4)]),
+                               full=colMeans(p3560$full[1+(1:4)])))
+
 # Summary table
 summary <- data.frame(machine=names(machines), idle1, idle2, single1, single2,
                       main1, main2, full1, full2, row.names=NULL)
 # Save RDS objects
+saveRDS(cores, "model/cores.rds")
 saveRDS(m4700, "model/m4700.rds")
 saveRDS(p1gen8, "model/p1gen8.rds")
 saveRDS(p15gen1, "model/p15gen1.rds")

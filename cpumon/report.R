@@ -1,7 +1,7 @@
 # Produce plots and tables for report
 
 # Before: info.csv (data)
-#         m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
+#         cores.rds, m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
 #         summary.csv (output)
 # After:  comparison.pdf, each.pdf (report)
 
@@ -12,6 +12,7 @@ mkdir("report")
 
 # Read data
 info <- read.taf("data/info.csv")
+cores <- readRDS("model/cores.rds")
 m4700 <- readRDS("model/m4700.rds")
 p1gen8 <- readRDS("model/p1gen8.rds")
 p15gen1 <- readRDS("model/p15gen1.rds")
@@ -39,7 +40,7 @@ plot_machine(p1gen8, "Fan")
 dev.off()
 
 # Plot machine comparison
-pdf("report/comparison.pdf", width=12, heigh=8)
+pdf("report/comparison.pdf", width=12, height=8)
 par(mfrow=c(3,4))
 plot_comparison(machines, "idle", "Freq")
 plot_comparison(machines, "single", "Freq")
@@ -53,6 +54,14 @@ plot_comparison(machines, "idle", "Fan")
 plot_comparison(machines, "single", "Fan")
 plot_comparison(machines, "main", "Fan")
 plot_comparison(machines, "full", "Fan")
+dev.off()
+
+pdf("report/cores.pdf", width=8, height=8)
+par(mfrow=c(2,2))
+plot_cores(cores$m4700)
+plot_cores(cores$p1gen8)
+plot_cores(cores$p15gen1)
+plot_cores(cores$p3560)
 dev.off()
 
 # Round and divide values
