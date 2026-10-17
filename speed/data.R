@@ -4,6 +4,7 @@
 # After:  passmark_online.csv, passmark_local.csv, catage.csv (data)
 
 dir.create("data", showWarnings=FALSE, recursive=TRUE)
+source("boot/software/utilities.R")
 
 # Read online PassMark single-thread scores.
 online <- read.table("boot/data/passmark_online/my_laptops.dat",
@@ -25,32 +26,19 @@ passmark_online <- data.frame(
   online_single=online$Single,
   stringsAsFactors=FALSE)
 
-# Read the CPU single-thread score and processor label from each local report.
+# Read local PassMark results and keep the single-thread scores.
 passmark_files <- c(
   m4700="boot/data/passmark/data/dell_precision_m4700.dat",
   p15gen1="boot/data/passmark/data/lenovo_p15_gen1.dat",
   p3560="boot/data/passmark/data/dell_precision_3560.dat",
   p1gen8="boot/data/passmark/data/lenovo_p1_gen8.dat")
 
-read_passmark <- function(machine, file) {
-  lines <- readLines(file, warn=FALSE)
-  processor_line <- grep("\\(x86_64\\)", lines, value=TRUE)
-  score_line <- grep("CPU Single Threaded", lines, value=TRUE)
-  if (length(processor_line) != 1L || length(score_line) != 1L)
-    stop("Could not identify processor and single-thread score in ", file)
-
-  processor <- trimws(sub("\\s*\\(x86_64\\).*", "", processor_line))
-  score <- as.numeric(sub(".*CPU Single Threaded[[:space:]]+([0-9.]+).*",
-                          "\\1", score_line))
-  if (is.na(score))
-    stop("Could not parse CPU Single Threaded score in ", file)
-
-  data.frame(machine=machine, processor_local=processor,
-             passmark_single=score, stringsAsFactors=FALSE)
-}
-
-passmark_local <- do.call(rbind, Map(read_passmark, names(passmark_files),
-                                     unname(passmark_files)))
+passmark_results <- lapply(passmark_files, readPass)
+passmark_local <- do.call(rbind, passmark_results)
+passmark_local <- passmark_local[passmark_local$Variable == "single", , drop=FALSE]
+passmark_local$machine <- names(passmark_files)
+passmark_local$passmark_single <- as.numeric(passmark_local$Value)
+passmark_local <- passmark_local[c("machine", "passmark_single")]
 row.names(passmark_local) <- NULL
 
 # Read catage run times.

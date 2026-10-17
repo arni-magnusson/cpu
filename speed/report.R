@@ -13,7 +13,7 @@ relationship_summary <- read.csv("output/relationship_summary.csv",
 
 # Write compact tables for the report.
 passmark_comparison <- comparison[, c(
-  "machine", "processor_online", "processor_local", "online_single",
+  "machine", "processor_online", "online_single",
   "passmark_single", "score_difference", "score_percent_difference")]
 catage_speeds <- catage_speed[, c(
   "machine", "mcmc", "sec", "iterations_per_second")]
