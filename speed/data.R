@@ -3,7 +3,8 @@
 # Before: my_laptops.dat, catage.dat, and Passmark .dat files (boot/data)
 # After:  passmark_online.csv, passmark_local.csv, catage.csv (data)
 
-dir.create("data", showWarnings=FALSE, recursive=TRUE)
+library(TAF)
+mkdir("data")
 source("boot/software/utilities.R")
 
 # Read online PassMark single-thread scores.
@@ -45,7 +46,7 @@ row.names(passmark_local) <- NULL
 catage <- read.table("boot/data/catage.dat", header=TRUE,
                      stringsAsFactors=FALSE)
 
-write.csv(passmark_online, "data/passmark_online.csv", row.names=FALSE)
-write.csv(passmark_local, "data/passmark_local.csv", row.names=FALSE)
-write.csv(catage, "data/catage.csv", row.names=FALSE)
+write.taf(passmark_online, dir="data")
+write.taf(passmark_local, dir="data")
+write.taf(catage, dir="data")
 

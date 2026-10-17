@@ -4,17 +4,16 @@
 #         relationship_summary.csv (model)
 # After:  same analysis tables (output)
 
-dir.create("output", showWarnings=FALSE, recursive=TRUE)
+library(TAF)
+mkdir("output")
 
-comparison <- read.csv("model/comparison.csv", stringsAsFactors=FALSE)
-catage_speed <- read.csv("model/catage_speed.csv", stringsAsFactors=FALSE)
-relationship <- read.csv("model/relationship.csv", stringsAsFactors=FALSE)
-relationship_summary <- read.csv("model/relationship_summary.csv",
-                                 stringsAsFactors=FALSE)
+comparison <- read.taf("model/comparison.csv")
+catage_speed <- read.taf("model/catage_speed.csv")
+relationship <- read.taf("model/relationship.csv")
+relationship_summary <- read.taf("model/relationship_summary.csv")
 
-write.csv(comparison, "output/comparison.csv", row.names=FALSE)
-write.csv(catage_speed, "output/catage_speed.csv", row.names=FALSE)
-write.csv(relationship, "output/relationship.csv", row.names=FALSE)
-write.csv(relationship_summary, "output/relationship_summary.csv",
-          row.names=FALSE)
+write.taf(comparison, dir="output")
+write.taf(catage_speed, dir="output")
+write.taf(relationship, dir="output")
+write.taf(relationship_summary, dir="output")
 

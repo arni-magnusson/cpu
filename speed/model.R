@@ -4,12 +4,11 @@
 # After:  comparison.csv, catage_speed.csv, relationship.csv,
 #         relationship_summary.csv (model)
 
-dir.create("model", showWarnings=FALSE, recursive=TRUE)
+library(TAF)
+mkdir("model")
 
-passmark_online <- read.csv("data/passmark_online.csv",
-                            stringsAsFactors=FALSE)
-passmark_local <- read.csv("data/passmark_local.csv",
-                           stringsAsFactors=FALSE)
+passmark_online <- read.taf("data/passmark_online.csv")
+passmark_local <- read.taf("data/passmark_local.csv")
 machine_order <- c("m4700", "p15gen1", "p3560", "p1gen8")
 
 # Pair online and local PassMark measurements by laptop.
@@ -24,7 +23,7 @@ comparison$score_percent_difference <- 100 * (comparison$score_ratio - 1)
 row.names(comparison) <- NULL
 
 # Calculate catage iteration rates, retaining both run lengths.
-catage_speed <- read.csv("data/catage.csv", stringsAsFactors=FALSE)
+catage_speed <- read.taf("data/catage.csv")
 catage_speed$iterations_per_second <- catage_speed$mcmc / catage_speed$sec
 
 # Compare local PassMark scores with the sustained (1e7 iteration) catage run.
@@ -59,9 +58,8 @@ relationship_summary <- data.frame(
           max(relationship$iterations_per_second_per_passmark_point[complete])),
   stringsAsFactors=FALSE)
 
-write.csv(comparison, "model/comparison.csv", row.names=FALSE)
-write.csv(catage_speed, "model/catage_speed.csv", row.names=FALSE)
-write.csv(relationship, "model/relationship.csv", row.names=FALSE)
-write.csv(relationship_summary, "model/relationship_summary.csv",
-          row.names=FALSE)
+write.taf(comparison, dir="model")
+write.taf(catage_speed, dir="model")
+write.taf(relationship, dir="model")
+write.taf(relationship_summary, dir="model")
 
