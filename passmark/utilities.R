@@ -37,6 +37,7 @@ readPass <- function(file)
 
   # Simplify values
   x$Value <- sub(" .*", "", x$Value)
+  x$Value <- type.convert(x$Value, as.is=TRUE)
 
   x
 }
