@@ -1,5 +1,5 @@
 Model       Freq  Turbo  Cores  Threads   L1    L2  L3   W  Date        Single  Laptop
-i7-720QM    1600   2800      4        8   64  0.25   6  45  2009-09-01     928  Precision-M4500
+i7-820QM    1733   3066      4        8   64  0.25   6  45  2009-09-01    1062  Precision-M4500
 i7-2760QM   2400   3500      4        8   64  0.25   6  45  2011-09-01    1509  Precision-M4600
 i7-3740QM   2700   3700      4        8   64  0.25   6  45  2012-09-01    1884  Precision-M4700
 i7-4800MQ   2700   3700      4        8   64  0.25   6  47  2013-06-01    1919  Precision-M4800
