@@ -13,11 +13,14 @@ catage <- read.taf("output/catage.csv")
 # Reorder machines
 catage$machine <- reorder(catage$machine, catage$speed, median)
 
+# Prepare plot
+labels <- c("Short", "Sustained")
+
 # Barplot
 taf.png("speed")
 barplot(xtabs(speed~job+machine, catage), beside=TRUE, legend=TRUE,
-        args.legend=list(x="topleft", bty="n", inset=0.02),
-        ylab="Speed (model iterations per second)")
+        args.legend=list(x="topleft", legend=labels, bty="n", inset=0.02),
+        main="Speed measurements", ylab="Speed (model iterations / sec)")
 dev.off()
 
 # Prepare summary table
