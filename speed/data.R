@@ -1,52 +1,50 @@
 # Prepare data, write CSV data tables
 #
-# Before: my_laptops.dat, catage.dat, and Passmark .dat files (boot/data)
-# After:  passmark_online.csv, passmark_local.csv, catage.csv (data)
+# Before: catage.dat, my_laptops.dat, passmark/*.dat (boot/data)
+# After:  catage.csv, passmark.csv (data)
 
 library(TAF)
-mkdir("data")
 source("boot/software/utilities.R")
 
-# Read online PassMark single-thread scores.
-online <- read.table("boot/data/passmark_online/my_laptops.dat",
-                     header=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+mkdir("data")
 
-laptop_machine <- c(
-  "Dell-Precision-M4700"="m4700",
-  "Lenovo-P15-Gen1"="p15gen1",
-  "Dell-Precision-3560"="p3560",
-  "Lenovo-P1-Gen8"="p1gen8")
+# Read data
+catage <- read.table("boot/data/catage.dat", header=TRUE)
+m4700 <- readPass("boot/data/passmark/data/dell_precision_m4700.dat")
+p1gen8 <- readPass("boot/data/passmark/data/lenovo_p1_gen8.dat")
+p15gen1 <- readPass("boot/data/passmark/data/lenovo_p15_gen1.dat")
+p3560 <- readPass("boot/data/passmark/data/dell_precision_3560.dat")
+passmark.online <- read.table("boot/data/passmark_online/my_laptops.dat",
+                              header=TRUE)
 
-online$machine <- unname(laptop_machine[online$Laptop])
-if (anyNA(online$machine))
-  stop("An online PassMark laptop name has no machine mapping")
+# Create lookup table to convert labels to processor name
+lookup <- data.frame(
+  machine = c("m4700", "p1gen8", "p15gen1", "p3560"),
+  processor = c("i7-3740QM", "u9-285H", "i7-10875H", "i7-1165G7"))
 
-passmark_online <- data.frame(
-  machine=online$machine,
-  processor_online=online$Model,
-  online_single=online$Single,
-  stringsAsFactors=FALSE)
+# Format catage measurements
+catage <- catage[catage$mcmc==1e7,]
+catage <- merge(catage, lookup)
+catage <- catage[c("processor", "mcmc", "sec")]
+catage <- catage[order(catage$processor),]
 
-# Read local PassMark results and keep the single-thread scores.
-passmark_files <- c(
-  m4700="boot/data/passmark/data/dell_precision_m4700.dat",
-  p15gen1="boot/data/passmark/data/lenovo_p15_gen1.dat",
-  p3560="boot/data/passmark/data/dell_precision_3560.dat",
-  p1gen8="boot/data/passmark/data/lenovo_p1_gen8.dat")
+# Format local PassMark measurements
+passmark.local <- data.frame(m4700=m4700$Value[m4700$Variable=="single"],
+                             p1gen8=p1gen8$Value[p1gen8$Variable=="single"],
+                             p15gen1=p15gen1$Value[p15gen1$Variable=="single"],
+                             p3560=p3560$Value[p3560$Variable=="single"])
+passmark.local <- data.frame(machine=names(passmark.local),
+                             local=unlist(passmark.local), row.names=NULL)
+passmark.local <- merge(passmark.local, lookup)
+passmark.local <- passmark.local[c("processor", "local")]
 
-passmark_results <- lapply(passmark_files, readPass)
-passmark_local <- do.call(rbind, passmark_results)
-passmark_local <- passmark_local[passmark_local$Variable == "single", , drop=FALSE]
-passmark_local$machine <- names(passmark_files)
-passmark_local$passmark_single <- as.numeric(passmark_local$Value)
-passmark_local <- passmark_local[c("machine", "passmark_single")]
-row.names(passmark_local) <- NULL
+# Format online PassMark measurements
+passmark.online <- data.frame(processor=passmark.online$Model,
+                              online=passmark.online$Single)
 
-# Read catage run times.
-catage <- read.table("boot/data/catage.dat", header=TRUE,
-                     stringsAsFactors=FALSE)
+# Combine local and online PassMark measurements
+passmark <- merge(passmark.online, passmark.local)
 
-write.taf(passmark_online, dir="data")
-write.taf(passmark_local, dir="data")
+# WriRead catage run times
 write.taf(catage, dir="data")
-
+write.taf(passmark, dir="data")
