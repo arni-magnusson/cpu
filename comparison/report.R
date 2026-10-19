@@ -49,7 +49,7 @@ dev.off()
 # Plot speed results
 taf.png("speed")
 z <- barplot(speed~processor, catage,
-             main="Actual speed vs. expecation based on synthetic benchmark",
+             main="Actual speed vs. expectation based on synthetic benchmark",
              xlab="", ylab="Speed (model iterations / sec)")
 x1 <- z - 0.2
 x2 <- z + 0.2
