@@ -1,7 +1,8 @@
 # Run analysis, write model results
 
-# Before: i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv, r7_low.csv (data)
-# After:  i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
+# Before: apple.csv, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
+#         r7_low.csv (data)
+# After:  apple.csv, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
 #         r7_low.csv (model)
 
 library(TAF)
@@ -9,6 +10,7 @@ library(TAF)
 mkdir("model")
 
 # Read tables
+apple <- read.taf("data/apple.csv")
 i7_high <- read.taf("data/i7_high.csv")
 i7_medium <- read.taf("data/i7_medium.csv")
 i7_low <- read.taf("data/i7_low.csv")
@@ -23,7 +25,16 @@ i7_low$Improve <- improve(i7_low)
 r7_high$Improve <- improve(r7_high)
 r7_low$Improve <- improve(r7_low)
 
+# Replace outlier with prediction
+basis <- apple[-grep("M3", apple$Model),]
+air <- basis$Speed[grep("[0-9]$", basis$Model)]
+pro <- basis$Speed[grep("Pro", basis$Model)]
+# Relationship between Air and Pro tends to be around 97%
+pred <- round(apple$Speed[apple$Model == "M3-Pro"] * mean(air) / mean(pro))
+apple$Speed[apple$Model == "M3"] <- pred
+
 # Save tables
+write.taf(apple, dir="model")
 write.taf(i7_high, dir="model")
 write.taf(i7_medium, dir="model")
 write.taf(i7_low, dir="model")
