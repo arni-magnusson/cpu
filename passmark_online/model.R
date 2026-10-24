@@ -2,7 +2,7 @@
 
 # Before: companies.csv, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
 #         r7_low.csv (data)
-# After:  companies.csv, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
+# After:  fm.rds, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
 #         r7_low.csv (model)
 
 library(TAF)
@@ -10,7 +10,7 @@ library(TAF)
 mkdir("model")
 
 # Read tables
-companies <- read.taf("data/companies.csv")
+companies <- read.taf("data/companies.csv", colClasses=c(Date="Date"))
 i7_high <- read.taf("data/i7_high.csv")
 i7_medium <- read.taf("data/i7_medium.csv")
 i7_low <- read.taf("data/i7_low.csv")
@@ -26,7 +26,10 @@ r7_high$Improve <- improve(r7_high)
 r7_low$Improve <- improve(r7_low)
 
 # Fit linear model with common slope
+fm <- lm(log10(Speed)~Company+Date, companies, subset=Date>as.Date("2018-06-01"))
 
+# Save fitted model
+saveRDS(fm, "model/fm.rds")
 
 # Save tables
 write.taf(i7_high, dir="model")
