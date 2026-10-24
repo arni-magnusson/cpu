@@ -4,7 +4,6 @@
 # After:  apple.png, companies.png (report)
 
 library(TAF)
-library(lattice)
 
 mkdir("report")
 
@@ -23,9 +22,10 @@ dev.off()
 
 # Apple vs Intel vs AMD
 taf.png("companies", width=1200)
-p <- xyplot(Speed~Date, companies, groups=Company, col=c(2,1,4), pch=19,
-            key=list(points=list(pch=19,col=c(1,4,2)),
-                     text=list(c("Apple", "Intel", "AMD")),
-                     corner=c(0.03,0.97)))
-plot(p)
+plot(Speed~Date, companies, type="n", log="y")
+points(Speed~Date, companies, subset=Company=="Apple", pch=19, col=1)
+points(Speed~Date, companies, subset=Company=="Intel", pch=19, col=4)
+points(Speed~Date, companies, subset=Company=="AMD", pch=19, col=2)
+legend("topleft", legend=c("Apple", "Intel", "AMD"), pch=19, col=c(1,4,2),
+       bty="n", inset=0.02, y.intersp=1.25)
 dev.off()
