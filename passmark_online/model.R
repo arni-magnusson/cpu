@@ -2,8 +2,8 @@
 
 # Before: companies.csv, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
 #         r7_low.csv (data)
-# After:  fm.rds, i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
-#         r7_low.csv (model)
+# After:  companies_fit.csv, companies_intercept.csv, fm.rds, i7_high.csv,
+#         i7_low.csv, i7_medium.csv, r7_high.csv, r7_low.csv (model)
 
 library(TAF)
 
@@ -25,13 +25,21 @@ i7_low$Improve <- improve(i7_low)
 r7_high$Improve <- improve(r7_high)
 r7_low$Improve <- improve(r7_low)
 
-# Fit linear model with common slope
-fm <- lm(log10(Speed)~Company+Date, companies, subset=Date>as.Date("2018-06-01"))
+# Fit ancova model
+fm <- lm(log(Speed)~-1+Company+Date, companies, subset=Date>"2018-06-01")
+x0 <- -coef(fm)[1:3] / coef(fm)[4]
+names(x0) <- sub("Company", "", names(x0))
+companies.intercept <- data.frame(Company=names(x0), Intercept=as.Date(x0))
+companies.fit <- expand.grid(Company=c("AMD", "Apple", "Intel"),
+                             Date=c(as.Date("2018-06-01"), max(companies$Date)))
+companies.fit$Speed <- exp(predict(fm, companies.fit))
 
 # Save fitted model
 saveRDS(fm, "model/fm.rds")
 
 # Save tables
+write.taf(companies.fit, dir="model")
+write.taf(companies.intercept, dir="model")
 write.taf(i7_high, dir="model")
 write.taf(i7_medium, dir="model")
 write.taf(i7_low, dir="model")
