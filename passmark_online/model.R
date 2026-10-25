@@ -26,13 +26,14 @@ r7_high$Improve <- improve(r7_high)
 r7_low$Improve <- improve(r7_low)
 
 # Fit ancova model
-fm <- lm(log(Speed)~-1+Company+Date, companies, subset=Date>"2018-06-01")
+start <- as.Date("2018-07-01")
+fm <- lm(log(Speed)~-1+Company+Date, companies, subset=Date>start)
 x0 <- -coef(fm)[1:3] / coef(fm)[4]
 names(x0) <- sub("Company", "", names(x0))
 companies.lag <- data.frame(Company=names(x0), Intercept=as.Date(x0),
                                   Lag=(x0-min(x0))/365.25)
 companies.fit <- expand.grid(Company=c("AMD", "Apple", "Intel"),
-                             Date=c(as.Date("2018-06-01"), max(companies$Date)))
+                             Date=c(start, max(companies$Date)))
 companies.fit$Speed <- exp(predict(fm, companies.fit))
 
 # Save fitted model
