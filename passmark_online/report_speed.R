@@ -16,9 +16,12 @@ i7_low <- read.taf("output/i7_low.csv", colClasses=c(Date="Date"))
 r7_high <- read.taf("output/r7_high.csv", colClasses=c(Date="Date"))
 r7_low <- read.taf("output/r7_low.csv", colClasses=c(Date="Date"))
 
+# Prepare for plotting
+score <- "Score (PassMark single thread)"
+
 # Plot speed over time
 taf.png("speed_all", width=1200)
-plot(Speed~Date, i7_high[-1,], log="y", type="o", col=4,
+plot(Speed~Date, i7_high[-1,], log="y", type="o", col=4, ylab=score,
      xlim=as.Date(c("2010-01-01", "2027-01-01")), ylim=c(1100, 4400))
 lines(Speed~Date, r7_high, type="o", col=2)
 lines(Speed~Date, i7_medium, type="o", col=4)
@@ -27,18 +30,18 @@ lines(Speed~Date, r7_low, type="o", col=2)
 dev.off()
 
 taf.png("speed_high", width=1200)
-plot(Speed~Date, i7_high[-1,], log="y", type="o", col=4,
+plot(Speed~Date, i7_high[-1,], log="y", type="o", col=4, ylab=score,
      xlim=as.Date(c("2010-01-01", "2027-01-01")), ylim=c(1100, 4400))
 lines(Speed~Date, r7_high, type="o", col=2)
 dev.off()
 
 taf.png("speed_low", width=1200)
-plot(Speed~Date, i7_low[-1,], log="y", type="o", col=4,
+plot(Speed~Date, i7_low[-1,], log="y", type="o", col=4, ylab=score,
      xlim=as.Date(c("2010-01-01", "2027-01-01")), ylim=c(1100, 4400))
 lines(Speed~Date, r7_low, type="o", col=2)
 dev.off()
 
 taf.png("speed_medium", width=1200)
-plot(Speed~Date, i7_medium[-1,], log="y", type="o", col=4,
+plot(Speed~Date, i7_medium[-1,], log="y", type="o", col=4, ylab=score,
      xlim=as.Date(c("2010-01-01", "2027-01-01")), ylim=c(1100, 4400))
 dev.off()
