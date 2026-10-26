@@ -19,7 +19,7 @@ r7_low <- read.taf("output/r7_low.csv", colClasses=c(Date="Date"))
 
 # Plot improvement
 taf.png("improve_amd_high")
-implot(r7_high)
+implot(r7_high[-1,])
 dev.off()
 
 taf.png("improve_amd_low")
