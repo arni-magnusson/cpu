@@ -13,8 +13,8 @@ apple <- read.taf("data/apple.csv", colClasses=c(Date="Date"))
 companies <- read.taf("data/companies.csv", colClasses=c(Date="Date"))
 companies.fit <- read.taf("output/companies_fit.csv", colClasses=c(Date="Date"))
 companies.lag <- read.taf("output/companies_lag.csv")
-i7_high <- read.taf("output/i7_high.csv", colClasses=c(Date="Date"))
-r7_high <- read.taf("output/r7_high.csv", colClasses=c(Date="Date"))
+i7.high <- read.taf("output/i7_high.csv", colClasses=c(Date="Date"))
+r7.high <- read.taf("output/r7_high.csv", colClasses=c(Date="Date"))
 
 # Prepare for plotting
 score <- "Score (PassMark single thread)"

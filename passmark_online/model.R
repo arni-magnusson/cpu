@@ -11,19 +11,19 @@ mkdir("model")
 
 # Read tables
 companies <- read.taf("data/companies.csv", colClasses=c(Date="Date"))
-i7_high <- read.taf("data/i7_high.csv")
-i7_medium <- read.taf("data/i7_medium.csv")
-i7_low <- read.taf("data/i7_low.csv")
-r7_high <- read.taf("data/r7_high.csv")
-r7_low <- read.taf("data/r7_low.csv")
+i7.high <- read.taf("data/i7_high.csv")
+i7.medium <- read.taf("data/i7_medium.csv")
+i7.low <- read.taf("data/i7_low.csv")
+r7.high <- read.taf("data/r7_high.csv")
+r7.low <- read.taf("data/r7_low.csv")
 
 # Calculate relative speed improvement
 improve <- function(x) c(NA, x$Speed[-1] / x$Speed[-nrow(x)]) - 1
-i7_high$Improve <- improve(i7_high)
-i7_medium$Improve <- improve(i7_medium)
-i7_low$Improve <- improve(i7_low)
-r7_high$Improve <- improve(r7_high)
-r7_low$Improve <- improve(r7_low)
+i7.high$Improve <- improve(i7.high)
+i7.medium$Improve <- improve(i7.medium)
+i7.low$Improve <- improve(i7.low)
+r7.high$Improve <- improve(r7.high)
+r7.low$Improve <- improve(r7.low)
 
 # Fit ancova model
 start <- as.Date("2018-07-01")
@@ -42,8 +42,8 @@ saveRDS(fm, "model/fm.rds")
 # Save tables
 write.taf(companies.fit, dir="model")
 write.taf(companies.lag, dir="model")
-write.taf(i7_high, dir="model")
-write.taf(i7_medium, dir="model")
-write.taf(i7_low, dir="model")
-write.taf(r7_high, dir="model")
-write.taf(r7_low, dir="model")
+write.taf(i7.high, dir="model")
+write.taf(i7.medium, dir="model")
+write.taf(i7.low, dir="model")
+write.taf(r7.high, dir="model")
+write.taf(r7.low, dir="model")
