@@ -1,9 +1,3 @@
-# Produce plots and tables for report
-
-# Before:
-# After:
-
-library(TAF)
-
-mkdir("report")
-
+source("report_data.R")
+source("report_fit.R")
+source("report_relationship.R")
