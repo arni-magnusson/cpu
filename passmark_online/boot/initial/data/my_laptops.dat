@@ -1,5 +1,5 @@
 Model        nm  Freq  Turbo  Cores  Threads   L1    L2  L3   W  Date        Single  Laptop
+k7-2800     130  2133   2133      1        1  128  0.50   0  72  2003-06-07     385  Compaq-Presario-2108CL
+c2-T7500     65  2200   2200      2        2   64  4.00   0  35  2007-05-09     847  Lenovo-ThinkPad-T61
 i7-3740QM    22  2700   3700      4        8   64  0.25   6  45  2012-09-01    1886  Dell-Precision-M4700
-i7-10875H    14  2300   5100      8       16   64  0.25  16  45  2020-04-02    2679  Lenovo-P15-Gen1
 i7-1165G7    10  2800   4700      4        8   80  1.25  12  28  2020-09-02    2712  Dell-Precision-3560
-u9-285H      3   2900   5400      6       16  112  3.00  24  45  2025-01-13    4418  Lenovo-P1-Gen8
