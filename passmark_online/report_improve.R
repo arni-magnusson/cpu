@@ -1,4 +1,4 @@
-# Plots relative improvement for each release
+# Plot relative improvement for each processor generation
 
 # Before: i7_high.csv, i7_low.csv, i7_medium.csv, r7_high.csv,
 #         r7_low.csv (output)

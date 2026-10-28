@@ -1,4 +1,4 @@
-# Plot speed (single thread) over time
+# Plot comparison plots for Apple, Intel, and AMD
 
 # Before: apple.csv, companies.csv (data), companies_fit.csv,
 #         companies_lag.csv, i7_high.csv, r7_high (output)
