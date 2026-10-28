@@ -14,7 +14,7 @@ m4700 <- readPass("boot/data/passmark/data/dell_precision_m4700.dat")
 p1gen8 <- readPass("boot/data/passmark/data/lenovo_p1_gen8.dat")
 p15gen1 <- readPass("boot/data/passmark/data/lenovo_p15_gen1.dat")
 p3560 <- readPass("boot/data/passmark/data/dell_precision_3560.dat")
-passmark.online <- read.table("boot/data/passmark_online/my_laptops.dat",
+passmark.online <- read.table("boot/data/passmark_online/specs.dat",
                               header=TRUE)
 
 # Create lookup table to convert labels to processor name
