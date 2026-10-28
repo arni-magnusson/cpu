@@ -2,7 +2,7 @@
 
 # Before: companies.csv, history.csv, i7_high.csv, i7_low.csv, i7_medium.csv,
 #         r7_high.csv, r7_low.csv (data)
-# After:  companies_fit.csv,  companies_fm.rds, companies_lag.csv,
+# After:  companies_fit.csv,  companies_fm.rds, companies_lag.csv, history.csv,
 #         history_fit.csv, history_fm.RData, history_rate.csv, i7_high.csv,
 #         i7_low.csv, i7_medium.csv, r7_high.csv, r7_low.csv (model)
 
@@ -39,16 +39,16 @@ companies.fit <- expand.grid(Company=c("AMD", "Apple", "Intel"),
 companies.fit$Speed <- exp(predict(companies.fm, companies.fit))
 
 # Fit linear model to describe historical speed improvement
-twentyten <- as.Date("2010-01-01")
 history$Year <- as.numeric(history$Date) / 365.25
-early.fm <- lm(log(Speed)~Year, history, subset=Date<twentyten)
-late.fm <- lm(log(Speed)~Year, history, subset=Date>twentyten)
+history$Period <- ifelse(history$Date < "2010-01-01", "Early", "Late")
+early.fm <- lm(log(Speed)~Year, history, subset=Period=="Early")
+late.fm <- lm(log(Speed)~Year, history, subset=Period=="Late")
 slope <- c(coef(early.fm)[[2]], coef(late.fm)[[2]])
 history.rate <- data.frame(Period=c("Early", "Late"), Annual=exp(slope)-1,
                            Doubling=log(2) / slope)
 history.fit <- data.frame(Period=c("Early", "Early", "Late", "Late"),
-                          Date=c(range(history$Date[history$Date < twentyten]),
-                                 range(history$Date[history$Date > twentyten])))
+                          Date=c(range(history$Date[history$Period=="Early"]),
+                                 range(history$Date[history$Period=="Late"])))
 history.fit$Year <- as.numeric(history.fit$Date) / 365.25
 history.fit$Speed <- c(exp(predict(early.fm,
                                    history.fit[history.fit$Period == "Early",])),
@@ -62,6 +62,7 @@ save(early.fm, late.fm, file="model/history_fm.RData")
 # Save tables
 write.taf(companies.fit, dir="model")
 write.taf(companies.lag, dir="model")
+write.taf(history, dir="model")
 write.taf(history.fit, dir="model")
 write.taf(history.rate, dir="model")
 write.taf(i7.high, dir="model")
