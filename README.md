@@ -46,7 +46,7 @@ analysis with a different set of processors.
   frequency up and down as it hits thermal limits?
 
 - If there is an initial short-term peak in processor frequency followed by a
-  more stable condition, how different is the initial frequency from the
+  lower stable condition, how different is the initial frequency from the
   sustained frequency, and how long does the initial boost last?
 
 - How are the thermal and performance profiles different between the older and
@@ -115,7 +115,7 @@ measures processor wattage.
   frequency up and down as it hits thermal limits?
 
 - If there is an initial short-term peak in processor frequency followed by a
-  more stable condition, how different is the initial frequency from the
+  lower stable condition, how different is the initial frequency from the
   sustained frequency, and how long does the initial boost last?
 
 - How are the thermal and performance profiles different between the older and
