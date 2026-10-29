@@ -12,6 +12,9 @@ processors.
 The primary goal is to satisfy my curiosity, but the insights gained from the
 analysis can be useful to inform decisions for future hardware purchases.
 
+Written in reproducible TAF format, the intention is to make it easy to run the
+analysis with a different set of processors.
+
 ## Questions
 
 **1. [catage](catage)**
