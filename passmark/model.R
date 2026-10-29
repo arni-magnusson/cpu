@@ -1,7 +1,7 @@
 # Run analysis, write model results
 
 # Before: passmark.csv (data)
-# After:  single.csv (model)
+# After:  passmark.csv (model)
 
 library(TAF)
 
@@ -10,8 +10,9 @@ mkdir("model")
 # Read data
 passmark <- read.taf("data/passmark.csv")
 
-# Prepare single-thread benchmark score
-single <- data.frame(machine=passmark$machine, score=passmark$single)
+# Select and rename columns
+passmark <- passmark[c("machine", "single", "cpu", "memory")]
+names(passmark)[names(passmark) == "cpu"] <- "multi"
 
 # Write table
-write.taf(single, dir="model")
+write.taf(passmark, dir="model")

@@ -1,6 +1,6 @@
 # Produce plots and tables for report
 
-# Before: single.csv (output)
+# Before: passmark.csv (output)
 # After:  single.png (report)
 
 library(TAF)
@@ -8,13 +8,14 @@ library(TAF)
 mkdir("report")
 
 # Read data
-single <- read.taf("output/single.csv")
+passmark <- read.taf("output/passmark.csv")
 
 # Reorder machine
-single$machine <- reorder(single$machine, single$score, median)
 
-# Plot benchmark results
+# Single thread
+single <- passmark[order(passmark$single), c("machine", "single")]
 taf.png("single.png")
-barplot(score~machine, single, main="Synthetic benchmark results", xlab="",
-        ylab="Score (PassMark single thread)")
+barplot(single$single, names=single$machine,
+        main="Synthetic benchmark results (single thread)",
+        xlab="", ylab="Score (PassMark single thread)")
 dev.off()
