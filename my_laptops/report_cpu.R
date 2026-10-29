@@ -54,7 +54,7 @@ dev.off()
 # Fitted historical trend
 taf.png("cpu_speed_fit")
 plot(Speed~Date, specs, log="y", pch=21, bg=bg, ylim=c(350, 5000),
-      ylab="Score (PassMark single thread)")
+     ylab="Score (PassMark single thread)")
 lines(Speed~Date, speed.fit)
 dev.off()
 
@@ -66,5 +66,5 @@ dev.off()
 
 taf.png("cpu_speed_watts")
 plot(Speed/W~Date, specs, log="y", pch=21, bg=bg,
-     ylab="Processor speed per watt")
+     ylab="Single-thread performance per watt")
 dev.off()
