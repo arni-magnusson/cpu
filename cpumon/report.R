@@ -65,8 +65,8 @@ plot_cores(cores$p3560)
 dev.off()
 
 # Round and divide values
-summary <- rnd(summary, grep("idle|single|main|full", names(summary)), -2)
-summary <- div(summary, grep("idle|single|main|full", names(summary)))
+summary <- rnd(summary, grep("idle|single|main|full|spike", names(summary)), -2)
+summary <- div(summary, grep("idle|single|main|full|spike", names(summary)))
 
 # Compact description
 desc <- data.frame(machine=summary$machine,
@@ -74,6 +74,7 @@ desc <- data.frame(machine=summary$machine,
                                format(summary$idle2)),
                    work=paste0(format(summary$main2), "-",
                                format(summary$single2)),
+                   spike=summary$spike,
                    spec=paste0(format(info$freq), "-",
                                format(info$turbo)))
 

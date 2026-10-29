@@ -85,6 +85,11 @@ full1 <- sapply(full1, mean)
 full2 <- lapply(full, tail, 120)  # sustained
 full2 <- sapply(full2, mean)
 
+# Spike (single)
+spike <- sapply(machines, `[`, "single")
+spike <- sapply(spike, `[`, "Freq1")
+spike <- sapply(spike, max)
+
 # Differences between cores
 cores <- list(m4700=data.frame(idle=colMeans(m4700$idle[1+(1:4)]),
                                single=colMeans(m4700$single[1+(1:4)]),
@@ -107,7 +112,7 @@ cores <- list(m4700=data.frame(idle=colMeans(m4700$idle[1+(1:4)]),
 
 # Summary table
 summary <- data.frame(machine=names(machines), idle1, idle2, single1, single2,
-                      main1, main2, full1, full2, row.names=NULL)
+                      main1, main2, full1, full2, spike, row.names=NULL)
 # Save RDS objects
 saveRDS(cores, "model/cores.rds")
 saveRDS(m4700, "model/m4700.rds")
