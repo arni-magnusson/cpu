@@ -10,7 +10,8 @@ mkdir("data")
 # Read data
 specs <- read.table("boot/data/specs.dat", header=TRUE)
 
-# Rename column
+# Rename columns
+names(specs)[names(specs) == "Freq"] <- "Base"
 names(specs)[names(specs) == "Single"] <- "Speed"
 
 # Write table

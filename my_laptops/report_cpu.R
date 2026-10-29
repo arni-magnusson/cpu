@@ -59,6 +59,11 @@ lines(Speed~Date, speed.fit)
 dev.off()
 
 # Relationships between variables
+taf.png("cpu_speed_freq")
+plot(Speed~I(Turbo/1000), specs, log="xy", pch=21, bg=bg, ylim=c(350, 5000),
+     xlab="Frequency (GHz)", ylab="Score (PassMark single thread)")
+dev.off()
+
 taf.png("cpu_speed_nm")
 plot(Speed~sqrt(nm), specs, log="y", pch=21, bg=bg, ylim=c(350, 5000),
      xlab="sqrt(Process nm)", ylab="Score (PassMark single thread)")
