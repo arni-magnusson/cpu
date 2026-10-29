@@ -22,6 +22,9 @@ analysis with a different set of processors.
 - How fast are the four processors, based on actual measurements from a stock
   assessment model?
 
+- Is the speed (model iterations per second) very different between a short job
+  that takes seconds to complete and a longer job that takes minutes?
+
 **2. [comparison](comparison)** between **catage** and **passmark** measurements
 
 - How fast are the four processors, based on synthetic benchmarks?
