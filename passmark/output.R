@@ -1,10 +1,10 @@
 # Extract results of interest, write CSV output tables
 
-# Before: passmark.csv (model)
-# After:  passmark.csv (output)
+# Before: single.csv (model)
+# After:  single.csv (output)
 
 library(TAF)
 
 mkdir("output")
 
-cp("model/passmark.csv", "output")
+cp("model/single.csv", "output")
