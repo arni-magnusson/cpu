@@ -78,6 +78,11 @@ full1 <- sapply(full1, mean)
 full2 <- lapply(full, tail, 120)  # sustained
 full2 <- sapply(full2, mean)
 
+# Freq (spike)
+spike <- sapply(machines, `[`, "single")
+spike <- sapply(spike, `[`, "Freq")
+spike <- sapply(spike, max)
+
 # Watt
 watt <- sapply(machines, `[`, "full")
 watt <- sapply(watt, `[`, "Watt")
@@ -90,7 +95,8 @@ watt2 <- sapply(watt2, mean)
 
 # Summary table
 summary <- data.frame(machine=names(machines), idle, single1, single2, main1,
-                      main2, full1, full2, watt0, watt1, watt2, row.names=NULL)
+                      main2, full1, full2, spike, watt0, watt1, watt2,
+                      row.names=NULL)
 
 # Save RDS objects
 saveRDS(m4700, "model/m4700.rds")
