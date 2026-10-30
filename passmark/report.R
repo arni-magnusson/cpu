@@ -1,7 +1,8 @@
 # Produce plots and tables for report
 
 # Before: passmark.csv (output)
-# After:  cores.png, multi.png, single.png (report)
+# After:  cores.png, memory_benchmark.png, memory_detail.png, multi.png,
+#         single.png (report)
 
 library(TAF)
 
@@ -29,7 +30,7 @@ memory <- memory[order(memory$memory),]
 memory <- memory[c("machine", "memory", "database", "readcache", "read",
                    "write", "available", "latency", "threaded", "module")]
 labels <- paste0(memory$machine, "\n(", memory$module, ")")
-taf.png("memory")
+taf.png("memory_benchmark")
 barplot(memory$memory, names=labels, main="Memory benchmark", xlab="",
         ylab="Score", yaxt="n", mgp=c(3,1.5,0))
 axis(2)
