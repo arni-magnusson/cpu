@@ -81,7 +81,16 @@ analysis with a different set of processors.
   performance per watt similar between the high-powered and low-powered
   machines?
 
-**5. [passmark_online](passmark_online)**
+**5. [passmark](passmark)**
+
+- How fast are the four processors, based on local benchmark results?
+
+- Is the difference between single-thread and multithread performance roughly
+  proportional to the number of physical cores?
+
+- Do newer memory modules get higher scores in the memory benchmark results?
+
+**6. [passmark_online](passmark_online)**
 
 - How quickly has single-thread performance increased over the last fifteen
   years?
@@ -98,7 +107,7 @@ analysis with a different set of processors.
 - Did single-thread performance increase at a similar rate in the old days (from
   2000 to 2010) compared to the later period since 2010?
 
-**6. [turbostat](turbostat)**
+**7. [turbostat](turbostat)**
 
 Similar to analysis 3 (**cpumon**) but using different processor monitoring
 software. They give slightly different results and measure different variables:
