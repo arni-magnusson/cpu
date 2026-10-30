@@ -2,7 +2,7 @@
 
 # Before: info.csv (data), m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (model)
 #         summary.csv (output)
-# After:  comparison.pdf, desc.csv, each.pdf, summary.csv (report)
+# After:  comparison.png, desc.csv, each.png, summary.csv (report)
 
 library(TAF)
 source("utilities.R")
@@ -51,7 +51,7 @@ smooth_p3560$single$Watt <- loess(stable~iter, span=0.30)$fitted
 smooth_p3560$idle <- mean(p3560$idle$Watt)
 
 # Plot each machine
-pdf("report/each.pdf", width=12, height=8)
+taf.png("each", 3600, 2400, res=300)
 par(mfrow=c(3,4))
 plot_machine(m4700, "Freq")
 plot_machine(p15gen1, "Freq")
@@ -68,7 +68,7 @@ plot_machine(p1gen8, "Watt")
 dev.off()
 
 # Plot machine comparison
-pdf("report/comparison.pdf", width=12, height=8)
+taf.png("comparison", 3600, 2400, res=300)
 par(mfrow=c(3,4))
 plot_comparison(machines, "idle", "Freq")
 plot_comparison(machines, "single", "Freq")
