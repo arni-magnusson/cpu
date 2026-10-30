@@ -17,24 +17,54 @@ analysis with a different set of processors.
 
 ## Questions
 
-**1. [catage](catage)**
+**1. [benchmark_actual](benchmark_actual)**
 
-- How fast are the four processors, based on actual measurements from a stock
-  assessment model?
+- How fast are the four processors, based on actual measurements from running a
+  stock assessment model?
 
 - Is the speed (model iterations per second) very different between a short job
   that takes seconds to complete and a longer job that takes minutes?
 
-**2. [comparison](comparison)** between **catage** and **passmark** measurements
+**2. [benchmark_local](benchmark_local)**
 
-- How fast are the four processors, based on synthetic benchmarks?
+- How fast are the four processors, based on local benchmark results?
 
-- How different are my local benchmark results from online averages?
+- Is the difference between single-thread and multithread performance roughly
+  proportional to the number of physical cores?
 
-- How different are the actual speed measurements using the stock assessment
-  model from what we would expect based on the synthetic benchmark results?
+- Do newer memory modules get higher scores in the memory benchmark results?
 
-**3. [cpumon](cpumon)**
+**3. [benchmark_online](benchmark_online)**
+
+- How quickly has single-thread performance increased over the last fifteen
+  years?
+
+- Have some processor generations provided massive performance improvements,
+  while other generations provided negligible improvements?
+
+- How do the trends vary between Intel, AMD, and Apple? Are some of them a year
+  or more behind the others?
+
+- Can low-powered processors provide decent single-thread performance compared
+  to the high-powered processors?
+
+- Did single-thread performance increase at a similar rate in the old days (from
+  2000 to 2010) compared to the later period since 2010?
+
+**4. [benchmark_summary](benchmark_summary)**
+
+Comparing the results from **benchmark_actual**, **benchmark_local**, and
+**benchmark_online**. The general question is how accurately do online reported
+benchmark results transfer to actual performance running stock assessment
+models.
+
+- How different are the actual speed measurements from what we would expect
+  based on the local synthetic benchmark results?
+
+- How different are the local benchmark results from online averages for that
+  processor?
+
+**5. [monitor_cpumon](monitor_cpumon)**
 
 - In idle conditions, what is the *frequency*, *temperature*, and *fan speed*
   for each processor?
@@ -61,58 +91,12 @@ analysis with a different set of processors.
 - In idle and single-thread loads, are all the cores running at similar
   frequency or very different?
 
-**4. [my_laptops](my_laptops)**
+**6. [monitor_turbostat](monitor_turbostat)**
 
-- Comparing ten laptops that I have worked on between 2005 and 2026, how do the
-  processor properties vary between the machines: frequency, number of cores,
-  cache size, watts, process nm, and synthetic benchmark results?
-
-- How do other technical properties and components vary between the laptops:
-  memory, storage, display, and laptop size?
-
-- What are the temporal trends and have the changes been relatively steady over
-  time?
-
-- How are the trends different between high-powered and low-powered machines?
-
-- Which variables are most closely related to single-thread performance?
-
-- Has performance per watt increased steadily over the years, and is the
-  performance per watt similar between the high-powered and low-powered
-  machines?
-
-**5. [passmark](passmark)**
-
-- How fast are the four processors, based on local benchmark results?
-
-- Is the difference between single-thread and multithread performance roughly
-  proportional to the number of physical cores?
-
-- Do newer memory modules get higher scores in the memory benchmark results?
-
-**6. [passmark_online](passmark_online)**
-
-- How quickly has single-thread performance increased over the last fifteen
-  years?
-
-- Have some processor generations provided massive performance improvements,
-  while other generations provided negligible improvements?
-
-- How do the trends vary between Intel, AMD, and Apple? Are some of them a year
-  or more behind the others?
-
-- Can low-powered processors provide decent single-thread performance compared
-  to the high-powered processors?
-
-- Did single-thread performance increase at a similar rate in the old days (from
-  2000 to 2010) compared to the later period since 2010?
-
-**7. [turbostat](turbostat)**
-
-Similar to analysis 3 (**cpumon**) but using different processor monitoring
-software. They give slightly different results and measure different variables:
-while cpumon measures the frequency of each core and the fan speed, turbostat
-measures processor wattage.
+Similar to **monitor_cpumon** but using different processor monitoring software.
+They give slightly different results and measure different variables: while
+cpumon measures the frequency of each core and the fan speed, turbostat measures
+processor wattage.
 
 - In idle conditions, what is the *frequency*, *temperature*, and *wattage* for
   each processor?
@@ -136,3 +120,24 @@ measures processor wattage.
 - How do the observed idle, single-thread, and multithread frequencies and
   wattage compare with the official manufacturer specifications for that
   processor?
+
+**7. [my_laptops](my_laptops)**
+
+Historical overview of ten laptops I have worked on between 2005 and 2026.
+
+- How do processor properties vary between the machines: frequency, number of
+  cores, cache size, watts, process nm, and synthetic benchmark results?
+
+- How do other components vary between the machines: memory, storage, display,
+  and laptop size?
+
+- How are the trends different between high-powered and low-powered machines?
+
+- What are the temporal trends and have the changes been relatively steady over
+  time?
+
+- Has performance per watt increased steadily over the years, and is the
+  performance per watt similar between the high-powered and low-powered
+  machines?
+
+- Which variables are most closely related to single-thread performance?
