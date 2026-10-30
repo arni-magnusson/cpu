@@ -50,10 +50,9 @@ history.fit <- data.frame(Period=c("Early", "Early", "Late", "Late"),
                           Date=c(range(history$Date[history$Period=="Early"]),
                                  range(history$Date[history$Period=="Late"])))
 history.fit$Year <- as.numeric(history.fit$Date) / 365.25
-history.fit$Speed <- c(exp(predict(early.fm,
-                                   history.fit[history.fit$Period == "Early",])),
-                       exp(predict(late.fm,
-                                   history.fit[history.fit$Period == "Late",])))
+history.fit$Speed <-
+  c(exp(predict(early.fm, history.fit[history.fit$Period == "Early",])),
+    exp(predict(late.fm, history.fit[history.fit$Period == "Late",])))
 
 # Save fitted models
 saveRDS(companies.fm, "model/companies_fm.rds")

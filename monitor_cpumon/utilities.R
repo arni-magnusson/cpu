@@ -38,8 +38,8 @@ plot_comparison <- function(machines, state, variable, main=NULL,
 plot_cores <- function(machine, main=tail(as.character(substitute(machine)), 1),
                        xlab="Core", ylab="Freq", lwd=1.5, col=c(8,1,4,5), ...)
 {
-  plot(NA, xlim=c(1,nrow(machine)), ylim=lim(unlist(machine)), main=main, xlab=xlab,
-       ylab=ylab, xaxt="n", ...)
+  plot(NA, xlim=c(1,nrow(machine)), ylim=lim(unlist(machine)), main=main,
+       xlab=xlab, ylab=ylab, xaxt="n", ...)
   axis(1, 1:nrow(machine))
   matlines(machine, lty=1, type="o", pch=16, lwd=lwd, col=col)
   legend("bottomleft", rev(names(machine)), lwd=lwd, col=rev(col),
