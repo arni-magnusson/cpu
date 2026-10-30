@@ -48,7 +48,7 @@ axis(2, values, round(values))
 dev.off()
 
 taf.png("cpu_watts")
-plot(W~Date, specs, ylim=lim(W), pch=21, bg=bg, ylab="Thermal design (W)")
+plot(W~Date, specs, ylim=lim(W), pch=21, bg=bg, ylab="Thermal design power (W)")
 dev.off()
 
 # Fitted historical trend
