@@ -1,7 +1,7 @@
 # Produce plots and tables for report
 
 # Before: passmark.csv (output)
-# After:  cores.png, single.png (report)
+# After:  cores.png, multi.png, single.png (report)
 
 library(TAF)
 
@@ -18,6 +18,14 @@ barplot(effective$effcores, col="lightgray", add=TRUE)
 legend("topleft", legend=c("Physical", "Effective"),
        fill=c("white","lightgray"), bty="n", inset=0.02, y.intersp=1.25)
 title(main="Effective cores = multithread score / single-thread score")
+dev.off()
+
+# Multithread
+multi <- passmark[order(passmark$multi),]
+taf.png("multi")
+barplot(multi$multi, names=multi$machine,
+        main="Synthetic benchmark results (multithread)",
+        xlab="", ylab="Score (PassMark multithread)")
 dev.off()
 
 # Single thread
