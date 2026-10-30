@@ -61,7 +61,7 @@ models.
 - How different are the actual speed measurements from what we would expect
   based on the local synthetic benchmark results?
 
-- How different are the local benchmark results from online averages for that
+- How different are my local benchmark results from online averages for that
   processor?
 
 **5. [monitor_cpumon](monitor_cpumon)**
