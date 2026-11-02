@@ -19,30 +19,32 @@ lwd <- 2
 
 # Historical observations
 taf.png("history_data", width=1200)
-plot(Speed~Date, history, type="n", log="y", ylab=score)
-points(Speed~Date, history, subset=Period=="Early")
-points(Speed~Date, history, subset=Period=="Late", pch=19)
-legend("topleft", legend=c("Early", "Late"), pch=c(1, 19), bty="n", inset=0.02,
-       y.intersp=1.25)
+plot(Speed~Date, history, type="n", log="y", main="History (Intel)", ylab=score)
+points(Speed~Date, history, subset=Period=="Early", col=4)
+points(Speed~Date, history, subset=Period=="Late", pch=19, col=4)
+legend("topleft", legend=c("Early", "Late"), pch=c(1, 19), col=4, bty="n",
+       inset=0.02, y.intersp=1.25)
 dev.off()
 
 # Historical trends
 taf.png("history_fit", width=1200)
-plot(Speed~Date, history, type="n", log="y", ylab=score)
-points(Speed~Date, history, subset=Period=="Early")
-points(Speed~Date, history, subset=Period=="Late", pch=19)
-lines(Speed~Date, history.fit, subset=Period=="Early")
-lines(Speed~Date, history.fit, subset=Period=="Late")
-legend("topleft", legend=c("Early", "Late"), pch=c(1, 19), bty="n", inset=0.02,
-       y.intersp=1.25)
+plot(Speed~Date, history, type="n", log="y", main="History (Intel)", ylab=score)
+points(Speed~Date, history, subset=Period=="Early", col=4)
+points(Speed~Date, history, subset=Period=="Late", pch=19, col=4)
+lines(Speed~Date, history.fit, subset=Period=="Early", col=4)
+lines(Speed~Date, history.fit, subset=Period=="Late", col=4)
+legend("topleft", legend=c("Early", "Late"), pch=c(1, 19), col=4, bty="n",
+       inset=0.02, y.intersp=1.25)
 dev.off()
 
 # Annual improvement
 taf.png("history_rate", width=1200)
-barplot(100*Annual~Period, history.rate, ylab="Annual improvement (%)")
+barplot(100*Annual~Period, history.rate, col=5:4, main="History (Intel)",
+        ylab="Annual improvement (%)")
 dev.off()
 
 # Doubling time
 taf.png("history_time", width=1200)
-barplot(Doubling~Period, history.rate, ylab="Doubling time (yr)")
+barplot(Doubling~Period, history.rate, col=5:4, main="History (Intel)",
+        ylab="Doubling time (yr)")
 dev.off()
