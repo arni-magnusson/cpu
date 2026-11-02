@@ -19,9 +19,9 @@ taf.png("cores")
 barplot(effective$physcores, names=effective$machine, col=0,
         ylab="Number of cores")
 barplot(effective$effcores, col="lightgray", add=TRUE)
-legend("topleft", legend=c("Physical", "Effective"),
+legend("topleft", legend=c("Physical", "Effective index"),
        fill=c("white","lightgray"), bty="n", inset=0.02, y.intersp=1.25)
-title(main="Effective cores = multithread score / single-thread score")
+title(main="Effective core index = multithread score / single-thread score")
 dev.off()
 
 # Memory
