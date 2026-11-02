@@ -39,6 +39,7 @@ companies.fit <- expand.grid(Company=c("AMD", "Apple", "Intel"),
 companies.fit$Speed <- exp(predict(companies.fm, companies.fit))
 
 # Fit linear model to describe historical speed improvement
+history <- history[history$Company == "Intel",]
 history$Year <- as.numeric(history$Date) / 365.25
 history$Period <- ifelse(history$Date < "2010-01-01", "Early", "Late")
 early.fm <- lm(log(Speed)~Year, history, subset=Period=="Early")
