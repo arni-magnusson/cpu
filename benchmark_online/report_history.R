@@ -32,7 +32,7 @@ dev.off()
 
 # Intel observations
 taf.png("history_data", width=1200)
-plot(Speed~Date, history.analysis, type="n", log="y", main=intel, ylab=score)
+plot(Speed~Date, history, type="n", log="y", main=intel, ylab=score)
 points(Speed~Date, history.analysis, subset=Period=="Early", col=4)
 points(Speed~Date, history.analysis, subset=Period=="Late", pch=19, col=4)
 legend("topleft", legend=c("Early", "Late"), pch=c(1, 19), col=4, bty="n",
@@ -41,7 +41,7 @@ dev.off()
 
 # Intel trends
 taf.png("history_fit", width=1200)
-plot(Speed~Date, history.analysis, type="n", log="y", main=intel, ylab=score)
+plot(Speed~Date, history, type="n", log="y", main=intel, ylab=score)
 points(Speed~Date, history.analysis, subset=Period=="Early", col=4)
 points(Speed~Date, history.analysis, subset=Period=="Late", pch=19, col=4)
 lines(Speed~Date, history.fit, subset=Period=="Early", col=4)
