@@ -37,7 +37,7 @@ analysis with a different set of processors.
 **3. [benchmark_online](benchmark_online)**
 
 - How quickly has single-thread performance increased over the last fifteen
-  years?
+  years? How about the last twenty-five years?
 
 - Have some processor generations provided massive performance improvements,
   while other generations provided negligible improvements?
@@ -50,6 +50,10 @@ analysis with a different set of processors.
 
 - Did single-thread performance increase at a similar rate in the old days (from
   2000 to 2010) compared to the later period since 2010?
+
+- Over the last twenty-five years, have there been periods when the performance
+  of Intel and AMD processors were similar and other periods when they were
+  different?
 
 **4. [benchmark_summary](benchmark_summary)**
 
