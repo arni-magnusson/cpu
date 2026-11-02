@@ -51,8 +51,12 @@ intel <- transform(i7.high, Company="Intel")
 amd <- transform(r7.high, Company="AMD")
 companies <- rbind(pro, intel, amd)
 
-# Combine Intel history
-history <- rbind(prehistory, i7.high[-1,])
+# Combine prehistoric and recent processors
+history.amd <- rbind(prehistory[prehistory$Company == "AMD",],
+                     cbind(Company="AMD", r7.high))
+history.intel <- rbind(prehistory[prehistory$Company == "Intel",],
+                       cbind(Company="Intel", i7.high[-1,]))
+history <- rbind(history.amd, history.intel)
 
 # Save tables
 write.taf(apple, dir="data")
