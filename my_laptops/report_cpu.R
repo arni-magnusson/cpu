@@ -3,7 +3,8 @@
 # Before: specs.csv, speed_fit.csv (output)
 # After:  cpu_cache.png, cpu_cores.png, cpu_freq.png, cpu_nm.png,
 #         cpu_speed_data.png, cpu_speed_fit.png, cpu_speed_nm.png,
-#         cpu_speed_watt.png, cpu_threads.png, cpu_watt.png (report)
+#         cpu_speed_watt.png, cpu_speed_watt_nm.png, cpu_threads.png,
+#         cpu_watt.png (report)
 
 library(TAF)
 
@@ -72,4 +73,9 @@ dev.off()
 taf.png("cpu_speed_watt")
 plot(Speed/W~Date, specs, log="y", pch=21, bg=bg,
      ylab="Single-thread performance per watt")
+dev.off()
+
+taf.png("cpu_speed_watt_nm")
+plot(Speed/W~sqrt(nm), specs, log="y", pch=21, bg=bg,
+     xlab="sqrt(Process nm)", ylab="Single-thread performance per watt")
 dev.off()
