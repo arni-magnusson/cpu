@@ -24,8 +24,10 @@ lwd <- 2
 
 # Intel and AMD process
 taf.png("history_companies_nm", width=1200)
-plot(nm~Date, history, log="y", type="n", ylim=c(2.6,200),
-     ylab="Sqrt(Process nm)")
+plot(nm~Date, history, log="y", type="n", ylim=c(2.6,200), yaxt="n",
+     ylab="Process nm")
+values <- c(3, 4, 5.8, 7.2, 10, 14, 22, 28, 35, 45, 65, 90, 130, 180)
+axis(2, values, round(values), las=1)
 points(nm~Date, history, subset=Company=="AMD", pch=19, col=2)
 points(nm~Date, history, subset=Company=="Intel", pch=19, col=4)
 lines(aggregate(Date~nm, history, min, subset=Company=="AMD")[2:1],
