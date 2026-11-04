@@ -2,7 +2,8 @@
 
 # Before: history.csv (data)
 #         history_analysis.csv, history_fit.csv, history.rate.csv (output)
-# After:  history_data.png, history_fit.png, history_rate.png,
+# After:  history_companies_nm.png, history_companies_speed.png,
+#         history_data.png, history_fit.png, history_rate.png,
 #         history_time.png (report)
 
 library(TAF)
@@ -21,8 +22,23 @@ score <- "Score (PassMark single thread)"
 intel <- "History (Intel)"
 lwd <- 2
 
-# Intel and AMD observations
-taf.png("history_companies", width=1200)
+# Intel and AMD process
+taf.png("history_companies_nm", width=1200)
+plot(nm~Date, history, log="y", type="n", ylim=c(2.6,200),
+     ylab="Sqrt(Process nm)")
+points(nm~Date, history, subset=Company=="AMD", pch=19, col=2)
+points(nm~Date, history, subset=Company=="Intel", pch=19, col=4)
+nm.smooth.intel <- loess(log(nm)~as.numeric(Date), history,
+                         subset=Company=="Intel")
+nm.smooth.amd <- loess(log(nm)~as.numeric(Date), history, subset=Company=="AMD")
+lines(nm.smooth.intel$x, exp(nm.smooth.intel$fit), lwd=2, col=4)
+lines(nm.smooth.amd$x, exp(nm.smooth.amd$fit), lwd=2, col=2)
+legend("topright", legend=c("Intel", "AMD"), pch=19, col=c(4, 2), bty="n",
+       inset=0.02, y.intersp=1.25)
+dev.off()
+
+# Intel and AMD speed
+taf.png("history_companies_speed", width=1200)
 plot(Speed~Date, history, type="n", log="y", ylab=score)
 points(Speed~Date, history, subset=Company=="AMD", pch=19, col=2)
 points(Speed~Date, history, subset=Company=="Intel", pch=19, col=4)
