@@ -71,11 +71,11 @@ plot(Speed~sqrt(nm), specs, log="y", pch=21, bg=bg, ylim=c(350, 5000),
 dev.off()
 
 taf.png("cpu_speed_watt")
-plot(Speed/W~Date, specs, log="y", pch=21, bg=bg,
+plot(Speed/W~Date, specs, log="y", pch=21, bg=bg, ylim=c(4.4,160),
      ylab="Single-thread performance per watt")
 dev.off()
 
 taf.png("cpu_speed_watt_nm")
-plot(Speed/W~sqrt(nm), specs, log="y", pch=21, bg=bg,
+plot(Speed/W~sqrt(nm), specs, log="y", pch=21, bg=bg, ylim=c(4.4,160),
      xlab="sqrt(Process nm)", ylab="Single-thread performance per watt")
 dev.off()
