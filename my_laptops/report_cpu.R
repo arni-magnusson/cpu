@@ -3,7 +3,7 @@
 # Before: specs.csv, speed_fit.csv (output)
 # After:  cpu_cache.png, cpu_cores.png, cpu_freq.png, cpu_nm.png,
 #         cpu_speed_data.png, cpu_speed_fit.png, cpu_speed_nm.png,
-#         cpu_speed_watts.png, cpu_threads.png, cpu_watts.png (report)
+#         cpu_speed_watt.png, cpu_threads.png, cpu_watt.png (report)
 
 library(TAF)
 
@@ -47,7 +47,7 @@ values <- c(0.9, 2.1, 4, 6, 8, 10, 12, 14, 16)
 axis(2, values, round(values))
 dev.off()
 
-taf.png("cpu_watts")
+taf.png("cpu_watt")
 plot(W~Date, specs, ylim=lim(W), pch=21, bg=bg, ylab="Thermal design power (W)")
 dev.off()
 
@@ -69,7 +69,7 @@ plot(Speed~sqrt(nm), specs, log="y", pch=21, bg=bg, ylim=c(350, 5000),
      xlab="sqrt(Process nm)", ylab="Score (PassMark single thread)")
 dev.off()
 
-taf.png("cpu_speed_watts")
+taf.png("cpu_speed_watt")
 plot(Speed/W~Date, specs, log="y", pch=21, bg=bg,
      ylab="Single-thread performance per watt")
 dev.off()
