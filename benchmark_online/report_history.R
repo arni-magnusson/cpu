@@ -28,11 +28,10 @@ plot(nm~Date, history, log="y", type="n", ylim=c(2.6,200),
      ylab="Sqrt(Process nm)")
 points(nm~Date, history, subset=Company=="AMD", pch=19, col=2)
 points(nm~Date, history, subset=Company=="Intel", pch=19, col=4)
-nm.smooth.intel <- loess(log(nm)~as.numeric(Date), history,
-                         subset=Company=="Intel")
-nm.smooth.amd <- loess(log(nm)~as.numeric(Date), history, subset=Company=="AMD")
-lines(nm.smooth.intel$x, exp(nm.smooth.intel$fit), lwd=2, col=4)
-lines(nm.smooth.amd$x, exp(nm.smooth.amd$fit), lwd=2, col=2)
+lines(aggregate(Date~nm, history, min, subset=Company=="AMD")[2:1],
+      lwd=2, col=2)
+lines(aggregate(Date~nm, history, min, subset=Company=="Intel")[2:1],
+      lwd=2, col=4)
 legend("topright", legend=c("Intel", "AMD"), pch=19, col=c(4, 2), bty="n",
        inset=0.02, y.intersp=1.25)
 dev.off()
