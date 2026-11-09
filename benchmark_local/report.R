@@ -1,8 +1,8 @@
 # Produce plots and tables for report
 
 # Before: passmark.csv (output)
-# After:  cores.png, memory_benchmark.png, memory_detail.png, multi.png,
-#         single.png (report)
+# After:  cpu_benchmark.png, cpu_multicore.png, effective_cores.png,
+#         memory_benchmark.png, memory_detail.png (report)
 
 library(TAF)
 
@@ -13,9 +13,25 @@ info <- read.taf("data/info.csv")
 memory.details <- read.taf("data/passmark.csv")
 passmark <- read.taf("output/passmark.csv")
 
+# Single thread
+single <- passmark[order(passmark$single),]
+taf.png("cpu_benchmark")
+barplot(single$single, names=single$machine,
+        main="Single-thread benchmark", xlab="",
+        ylab="Score (PassMark single thread)")
+dev.off()
+
+# Multithread
+multi <- passmark[order(passmark$multi),]
+taf.png("cpu_multicore")
+barplot(multi$multi, names=multi$machine,
+        main="Multithread benchmark", xlab="",
+        ylab="Score (PassMark multithread)")
+dev.off()
+
 # Effective cores
 effective <- passmark[order(passmark$effcores),]
-taf.png("cores")
+taf.png("effective_cores")
 barplot(effective$physcores, names=effective$machine, col=0,
         ylab="Number of cores")
 barplot(effective$effcores, col="lightgray", add=TRUE)
@@ -46,20 +62,4 @@ axis(2)
 barplot(memory$latency, names=labels, main="Memory (latency)", xlab="", col=3,
         ylab="Score", yaxt="n", mgp=c(3,1.5,0))
 axis(2)
-dev.off()
-
-# Multithread
-multi <- passmark[order(passmark$multi),]
-taf.png("multi")
-barplot(multi$multi, names=multi$machine,
-        main="Multithread benchmark", xlab="",
-        ylab="Score (PassMark multithread)")
-dev.off()
-
-# Single thread
-single <- passmark[order(passmark$single),]
-taf.png("single")
-barplot(single$single, names=single$machine,
-        main="Single-thread benchmark", xlab="",
-        ylab="Score (PassMark single thread)")
 dev.off()
