@@ -1,4 +1,4 @@
-Model,nm,Freq,Turbo,Cores,Threads,L1,L2,L3,W,Date,Speed
+Model,nm,Base,Turbo,Cores,Threads,L1,L2,L3,W,Date,Speed
 K10-K685,45,1800,1800,2,2,64,0.5,0,15,2011-01-04,729
 15h-4455M,32,2100,2800,2,2,48,1,0,17,2012-05-15,794
 15h-5345,32,2200,2800,2,2,48,1,0,17,2013-05-23,1094

@@ -1,4 +1,4 @@
-Company,Model,nm,Freq,Turbo,Cores,Threads,L1,L2,L3,W,Date,Speed
+Company,Model,nm,Base,Turbo,Cores,Threads,L1,L2,L3,W,Date,Speed
 AMD,K7-1800,130,1533,1533,1,1,64,0.25,0,35,2002-07-15,291
 AMD,K7-2000,130,1666,1666,1,1,64,0.25,0,45,2002-09-24,301
 AMD,K7-3000,130,2200,2200,1,1,64,0.5,0,72,2003-06-07,365

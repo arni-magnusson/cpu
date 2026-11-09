@@ -93,10 +93,9 @@ dev.off()
 specs <- specs[c("Date", "Laptop", "Model", "Cores", "Turbo", "RAM", "Storage")]
 names(specs)[names(specs) == "Date"] <- "Year"
 names(specs)[names(specs) == "Model"] <- "Processor"
-names(specs)[names(specs) == "Turbo"] <- "Freq"
 names(specs)[names(specs) == "RAM"] <- "Memory"
 specs$Year <- as.integer(format(specs$Year, "%Y"))
-specs$Freq <- format(round(specs$Freq / 1000, 1))
+specs$Turbo <- format(round(specs$Turbo / 1000, 1))
 specs$Memory <- formatC(specs$Memory)
 specs$Storage <- formatC(specs$Storage)
 

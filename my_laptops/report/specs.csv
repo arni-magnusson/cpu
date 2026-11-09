@@ -1,4 +1,4 @@
-Year,Laptop,Processor,Cores,Freq,Memory,Storage
+Year,Laptop,Processor,Cores,Turbo,Memory,Storage
 2003,Compaq-Presario-2108CL,k7-2800,1,2.1,0.5,0.04
 2007,Lenovo-ThinkPad-T61,c2-T7500,2,2.2,4,0.1
 2012,Dell-Precision-M4700,i7-3740QM,4,3.7,16,0.5

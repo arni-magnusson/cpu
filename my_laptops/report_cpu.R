@@ -28,7 +28,7 @@ axis(2, c(1,2,4,6,8))
 dev.off()
 
 taf.png("cpu_freq")
-plot(Turbo/1000~Date, specs, log="y", pch=21, bg=bg, ylab="Frequency (GHz)",
+plot(Turbo/1000~Date, specs, log="y", pch=21, bg=bg, ylab="Turbo (GHz)",
      ylim=c(2,6))
 dev.off()
 
@@ -62,7 +62,7 @@ dev.off()
 # Relationships between variables
 taf.png("cpu_speed_freq")
 plot(Speed~I(Turbo/1000), specs, log="xy", pch=21, bg=bg, ylim=c(350, 5000),
-     xlab="Frequency (GHz)", ylab="Score (PassMark single thread)")
+     xlab="Turbo (GHz)", ylab="Score (PassMark single thread)")
 dev.off()
 
 taf.png("cpu_speed_nm")

@@ -1,4 +1,4 @@
-Model        nm  Freq  Turbo  Cores  Threads   L1    L2  L3   W  Date        Single  Laptop
+Model        nm  Base  Turbo  Cores  Threads   L1    L2  L3   W  Date        Single  Laptop
 K10-X920BE   45  2300   2300      4        4  128  0.50   0  45  2010-05-12     944
 K10-3550MX   32  2000   2700      4        4  128  1.00   0  45  2011-12-07     962
 15h-4600M    32  2300   3200      4        4   48  1.00   0  35  2012-05-15    1095
