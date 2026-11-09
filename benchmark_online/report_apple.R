@@ -2,8 +2,8 @@
 
 # Before: apple.csv, companies.csv (data)
 #         companies_fit.csv, companies_lag.csv, i7_high.csv, r7_high (output)
-# After:  apple.png, companies_data.png, companies_fit.png,
-#         companies_lag.png (report)
+# After:  companies_data.png, companies_fit.png, companies_lag.png,
+#         macbook.png (report)
 
 library(TAF)
 
@@ -20,13 +20,6 @@ r7.high <- read.taf("output/r7_high.csv", colClasses=c(Date="Date"))
 # Prepare for plotting
 score <- "Score (PassMark single thread)"
 lwd <- 2
-
-# Air vs Pro
-taf.png("apple", width=1200)
-plot(Speed~Date, apple, log="y", pch=c(1,19), ylab=score)
-legend("topleft", legend=c("Pro", "Air"), pch=c(19,1), bty="n", inset=0.02,
-       y.intersp=1.25)
-dev.off()
 
 # Companies: Apple vs Intel vs AMD
 taf.png("companies_data", width=1200)
@@ -58,4 +51,11 @@ barplot(Lag~Company, companies.lag, xlab="", ylab="Lag (yrs)", col=0, border=NA)
 grid(NA, NULL, lty=1)
 barplot(Lag~Company, companies.lag, add=TRUE, col=c(1,4,2))
 title(main="Lag until company reaches the CPU performance of the best company")
+dev.off()
+
+# MacBook Air vs Pro
+taf.png("macbook", width=1200)
+plot(Speed~Date, apple, log="y", pch=c(1,19), ylab=score, main="Apple MacBook")
+legend("topleft", legend=c("Pro", "Air"), pch=c(19,1), bty="n", inset=0.02,
+       y.intersp=1.25)
 dev.off()
