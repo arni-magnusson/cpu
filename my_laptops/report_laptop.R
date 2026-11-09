@@ -90,7 +90,10 @@ text(specs$Date[n]-30, specs$Percentage[n]-0.004, "2 TB\nSSD", cex=0.9,
 dev.off()
 
 # Format specs
-specs <- specs[c("Date", "Laptop", "Model", "Cores", "Turbo", "RAM", "Storage")]
+specs$Hybrid[specs$Hybrid == "-"] <- ""
+specs$Cores <- paste0(specs$Cores, specs$Hybrid)
+cols <- c("Date", "Laptop", "Model", "Cores", "Turbo", "RAM", "Storage","W")
+specs <- specs[cols]
 names(specs)[names(specs) == "Date"] <- "Year"
 names(specs)[names(specs) == "Model"] <- "Processor"
 names(specs)[names(specs) == "RAM"] <- "Memory"
@@ -100,7 +103,7 @@ specs$Memory <- formatC(specs$Memory)
 specs$Storage <- formatC(specs$Storage)
 
 # Write to Markdown format
-specs.md <- kable(specs, "pipe", align="lllrrrr")
+specs.md <- kable(specs, "pipe", align="lllrrrrr")
 writeLines(specs.md, "report/specs.md")
 
 # Write tables
