@@ -41,25 +41,29 @@ title(main="Effective core index = multithread score / single-thread score")
 dev.off()
 
 # Memory
-memory <- merge(memory.details, info[c("machine", "module")])
+memory <- merge(memory.details, info[c("machine", "module", "year")])
 memory <- memory[order(memory$memory),]
 memory <- memory[c("machine", "memory", "database", "readcache", "read",
-                   "write", "available", "latency", "threaded", "module")]
-labels <- paste0(memory$machine, "\n(", memory$module, ")")
+                   "write", "available", "latency", "threaded", "module",
+                   "year")]
+labels <- paste0(memory$machine, "\n(", memory$module, ")\n", memory$year)
+
 taf.png("memory_benchmark")
+mgp <- c(3, 2.3, 0)
 barplot(memory$memory, names=labels, main="Memory benchmark", xlab="",
-        ylab="Score", yaxt="n", mgp=c(3,1.5,0))
+        ylab="Score", yaxt="n", mgp=mgp)
 axis(2)
 dev.off()
-taf.png("memory_details", 1600, 2400)
+
+taf.png("memory_details", 1600, 3600)
 par(mfrow=c(3,1))
 barplot(memory$read, names=labels, main="Memory (read)", xlab="", col=7,
-        ylab="Score", yaxt="n", mgp=c(3,1.5,0))
+        ylab="Score", yaxt="n", mgp=mgp)
 axis(2)
 barplot(memory$write, names=labels, main="Memory (write)", xlab="", col=2,
-        ylab="Score", yaxt="n", mgp=c(3,1.5,0))
+        ylab="Score", yaxt="n", mgp=mgp)
 axis(2)
 barplot(memory$latency, names=labels, main="Memory (latency)", xlab="", col=3,
-        ylab="Score", yaxt="n", mgp=c(3,1.5,0))
+        ylab="Score", yaxt="n", mgp=mgp)
 axis(2)
 dev.off()
