@@ -65,7 +65,7 @@ dev.off()
 # Relationship between variables
 taf.png("storage_memory_prop")
 specs$Percentage <- specs$RAM / (1000*specs$Storage)
-plot(Percentage~Date, specs, pch=21, bg=bg, ylim=lim(Percentage),
+plot(Percentage~Date, specs, pch=21, bg=bg, ylim=lim(Percentage, 1.15),
      main="Memory tends to be around 2% of storage", ylab="Memory / Storage")
 dev.off()
 
@@ -93,6 +93,12 @@ taf.png("thick_watt")
 plot(W~Height, specs, pch=21, bg=bg,
      main="Processor power and laptop thickness", xlab="Thickness (cm)",
      ylab="Thermal design power (W)")
+abline(lm(W~Height, specs))
+p1gen8 <- specs[specs$Laptop == "Lenovo-P1-Gen8",]
+t61 <- specs[specs$Laptop == "Lenovo-ThinkPad-T61",]
+text(p1gen8$Height, p1gen8$W+6, "new\npremium\naluminium", cex=0.9,
+     col="darkgray")
+text(t61$Height, t61$W-6, "old\nworkstation\nplastic", cex=0.9, col="darkgray")
 dev.off()
 
 # Format specs

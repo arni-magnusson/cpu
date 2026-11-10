@@ -16,7 +16,7 @@ speed.fit <- read.taf("output/speed_fit.csv", colClasses=c(Date="Date"))
 # Univariate time series
 taf.png("cpu_cache")
 plot(Cache~Date, specs, log="y", pch=21, bg=bg, yaxt="n", ylim=c(0.4, 32),
-     main="CPU: Processor memory", ylab="Cache (MB)")
+     main="CPU: On-chip memory", ylab="Cache (MB)")
 values <- c("0.5", "1", "2", "4", "8", "16", "32")
 axis(2, as.numeric(values), values)
 dev.off()
