@@ -15,6 +15,49 @@ analysis can be useful to inform decisions for future hardware purchases.
 Written in reproducible TAF format, the intention is to make it easy to run the
 analysis with a different set of processors.
 
+## Datasets
+
+### Current laptops
+
+The first dataset includes four processors that I have benchmarked:
+
+|Year|Laptop              |Processor      |Cores|Base|Turbo|Watt|
+|:---|:-------------------|:--------------|----:|---:|----:|---:|
+|2012|Dell-Precision-M4700|Intel i7-3740QM|  4HT| 2.7|  3.7|  45|
+|2020|Lenovo-P15-Gen-1    |Intel i7-10875H|  8HT| 2.3|  5.1|  45|
+|2020|Dell-Precision-3560 |Intel i7-1165G7|  4HT| 2.8|  4.7|  28|
+|2025|Lenovo-P1-Gen-8     |Intel u9-285H  |6+8+2| 2.9|  5.4|  45|
+
+The laptops are all running native Debian or Ubuntu. The idle state is measured
+in Balanced mode and sustained single-thread and multicore performance is
+measured in Performance mode.
+
+### My laptops
+
+The second dataset is a historical overview of laptops that I have worked on:
+
+|Year|Laptop                |Processor      |Cores|Turbo|Memory|Storage|
+|:---|:---------------------|:--------------|----:|----:|-----:|------:|
+|2003|Compaq-Presario-2108CL|AMD k7-2800    |    1|  2.1|   0.5|   0.04|
+|2007|Lenovo-ThinkPad-T61   |Intel c2-T7500 |    2|  2.2|     4|    0.1|
+|2012|Dell-Precision-M4700  |Intel i7-3740QM|  4HT|  3.7|    16|    0.5|
+|2015|Lenovo-X1-Yoga-Gen1   |Intel i7-6600U |  2HT|  3.4|     8|    0.5|
+|2017|Lenovo-X1-Yoga-Gen3   |Intel i7-8650U |  4HT|  4.2|    16|      1|
+|2018|HP-Elitebook-830-G6   |Intel i5-8265U |  4HT|  3.9|     8|    0.5|
+|2019|Lenovo-T14s-Gen1      |Intel i7-10510U|  4HT|  4.9|    16|      1|
+|2020|Lenovo-P15-Gen1       |Intel i7-10875H|  8HT|  5.1|    32|    1.5|
+|2020|Dell-Precision-3560   |Intel i7-1165G7|  4HT|  4.7|    32|      3|
+|2025|Lenovo-P1-Gen8        |Intel u9-285H  |6+8+2|  5.4|    64|      2|
+
+The dataset includes laptop features beyond the processor to show long-term
+trend in memory, storage, and other laptop characteristics.
+
+### Intel, AMD, Apple
+
+The third and largest dataset compares a wide variety of processors from Intel,
+AMD, and Apple. The dataset starts in 2000 and includes both low-powered and
+high-powered processors.
+
 ## Questions
 
 **1. [benchmark_actual](benchmark_actual)**
@@ -127,8 +170,6 @@ processor wattage.
 
 **7. [my_laptops](my_laptops)**
 
-Historical overview of ten laptops I have worked on between 2005 and 2026.
-
 - How do processor properties vary between the machines: frequency, number of
   cores, cache size, watts, process nm, and synthetic benchmark results?
 
@@ -141,7 +182,6 @@ Historical overview of ten laptops I have worked on between 2005 and 2026.
   time?
 
 - Has performance per watt increased steadily over the years, and is the
-  performance per watt similar between the high-powered and low-powered
-  machines?
+  efficiency similar between the high-powered and low-powered machines?
 
 - Which variables are most closely related to single-thread performance?
