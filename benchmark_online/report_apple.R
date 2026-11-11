@@ -23,7 +23,8 @@ lwd <- 2
 
 # Companies: Apple vs Intel vs AMD
 taf.png("companies_data", width=1200)
-plot(Speed~Date, companies, type="n", log="y", ylab=score)
+plot(Speed~Date, companies, type="n", log="y",
+     main="Processor performance by company", ylab=score)
 points(Speed~Date, companies, subset=Company=="Apple", pch=19, col=1)
 points(Speed~Date, companies, subset=Company=="Intel", pch=19, col=4)
 points(Speed~Date, companies, subset=Company=="AMD", pch=19, col=2)
@@ -33,7 +34,8 @@ dev.off()
 
 # Companies with fitted regression lines
 taf.png("companies_fit", width=1200)
-plot(Speed~Date, companies, type="n", log="y", ylab=score)
+plot(Speed~Date, companies, type="n", log="y",
+     main="Processor performance by company", ylab=score)
 points(Speed~Date, companies, subset=Company=="Apple", pch=19, col=1)
 points(Speed~Date, companies, subset=Company=="Intel", pch=19, col=4)
 points(Speed~Date, companies, subset=Company=="AMD", pch=19, col=2)
