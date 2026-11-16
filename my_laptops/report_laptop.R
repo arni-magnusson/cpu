@@ -4,7 +4,8 @@
 # After:  laptop_display.png, laptop_memory.png, laptop_power.png,
 #         laptop_storage.png, laptop_thick.png, laptop_weight.png,
 #         screen_density.png, screen_pixels.png, specs.csv, specs.md,
-#         storage_memory_prop.png, storage_memory_text.png (report)
+#         storage_memory_prop.png, storage_memory_text.png,
+#         thick_watt.png (report)
 
 library(TAF)
 library(knitr)

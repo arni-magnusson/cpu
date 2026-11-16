@@ -1,6 +1,6 @@
 # Prepare data, write CSV data tables
 #
-# Before: catage.dat, my_laptops.dat, passmark/*.dat (boot/data)
+# Before: catage.dat, specs.dat, passmark/*.dat (boot/data)
 # After:  catage.csv, passmark.csv (data)
 
 library(TAF)

@@ -1,6 +1,6 @@
 # Produce plots and tables for report
 
-# Before: passmark.csv (output)
+# Before: info.csv, passmark.csv (data), passmark.csv (output)
 # After:  cpu_benchmark.png, cpu_multicore.png, effective_cores.png,
 #         memory_benchmark.png, memory_details.png (report)
 

@@ -1,7 +1,8 @@
 # Run analysis, write model results
 
 # Before: m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds (data)
-# After:  m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds, summary.csv (model)
+# After:  cores.rds, m4700.rds, p1gen8.rds, p15gen1.rds, p3560.rds,
+#         summary.csv (model)
 
 library(TAF)
 source("utilities.R")  # means, remove_first, summary_machine
@@ -90,7 +91,7 @@ spike <- sapply(machines, `[`, "single")
 spike <- sapply(spike, `[`, "Freq1")
 spike <- sapply(spike, max)
 
-# Differences between cores
+# Freq by core
 cores <- list(m4700=data.frame(idle=colMeans(m4700$idle[1+(1:4)]),
                                single=colMeans(m4700$single[1+(1:4)]),
                                main=colMeans(m4700$main[1+(1:4)]),
