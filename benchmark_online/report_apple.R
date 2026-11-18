@@ -58,7 +58,7 @@ dev.off()
 
 # MacBook Air vs Pro
 taf.png("companies_macbook", width=1200)
-plot(Speed~Date, apple, log="y", pch=c(1,19), ylab=score, main="Apple MacBook")
+plot(Speed~Date, apple, log="y", pch=c(1,19), ylab=score, main="MacBook")
 legend("topleft", legend=c("Pro", "Air"), pch=c(19,1), bty="n", inset=0.02,
        y.intersp=1.25)
 dev.off()
